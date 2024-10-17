@@ -1,0 +1,34 @@
+{
+    "name": "ButtonControls",
+    "maps": [
+        {
+            "name": "PlayButton",
+            "id": "dccddb82-4707-4d80-952f-413989a62329",
+            "actions": [
+                {
+                    "name": "Play",
+                    "type": "Button",
+                    "id": "1863ca49-5431-4396-97b8-81ffed72ae43",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a204d57b-4a3d-49cb-a011-78c641799d61",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Play",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
