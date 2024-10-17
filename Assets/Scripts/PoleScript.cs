@@ -23,8 +23,8 @@ public class PoleScript : MonoBehaviour
     private Vector3 NextVert;
     private Vector3 NewVert;
     private Vector3 CurenrtPos;
-    private Vector3 NewPipeVert;
-    private Vector3 NextPipeVert;
+    private Vector3 NewColliderVert;
+    private Vector3 NextColliderVert;
     public Transform CustomPivot;
 
     public GameObject PipeCollider;
@@ -62,7 +62,7 @@ public class PoleScript : MonoBehaviour
     
     private void Polefalling()
     {
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.Space) && !isSpacePressed)
         {
             isRotating = true;
             isExtending = false;
@@ -85,23 +85,24 @@ public class PoleScript : MonoBehaviour
             isExtending = true;
             
         }
-        if (!isSpacePressed)
+        if (!isSpacePressed && isExtending)
         {
-            if (isExtending)
-            {
-                NextLength += new Vector3(0f, 1f);
-                NextVert += new Vector3(0f, 0.5f);
-                NewLength = new Vector3(10f, 0f) + NextLength;
-                NewVert = new Vector3(250f, 415f) + NextVert;
-                NextPipeVert += new Vector3(0f, 1f);
-                NewPipeVert = new Vector3(250f, 415f) + NextPipeVert;
+          
+            
+            NextLength += new Vector3(0f, 1f);
+            NextVert += new Vector3(0f, 0.5f);
 
-                // Changes the scale and position of the pole so it moves vertically only.
-                transform.localScale = NewLength;
-                transform.position = NewVert;
-                PipeCollider.transform.position = NewPipeVert;
+            NewLength = new Vector3(10f, 100f) + NextLength;
+            NewVert = new Vector3(200f, 465f) + NextVert;
 
-            }
+            NextColliderVert += new Vector3(0f, 1f);
+            NewColliderVert = new Vector3(200f, 515f) + NextColliderVert;
+
+            // Changes the scale and position of the pole so it moves vertically only.
+            transform.localScale = NewLength;
+            transform.position = NewVert;
+            PipeCollider.transform.position = NewColliderVert;
+            
         }
     }
 }

@@ -14,12 +14,11 @@ public class PoleCollisionScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        //if (other.gameObject.tag == "Building")
-        //{
-            //gameObject.GetComponent<PoleScript>().
+        if (other.gameObject.tag == "Building")
+        {
             CollisionCheck = true;
             Debug.Log("Is Colliding ");
         
-        //}
+        }
     }
 } 
