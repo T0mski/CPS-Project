@@ -29,19 +29,10 @@ public class PoleScript : MonoBehaviour
 
     public GameObject PipeCollider;
     
-    
-   
-
-
-
-
-
-
     private void Start()
     {
         //gets the current position at the start of the game for debuging.
         CurenrtPos = PipeCollider.transform.position;
-        
     }
 
     // Update fucntion called every game tick.
@@ -51,15 +42,11 @@ public class PoleScript : MonoBehaviour
         Polefalling();
         // calls the PoleExtention Functuion every game tick.
         PoleExtention();
-        if (PipeCollider.GetComponent<PoleCollisionScript>().CollisionCheck == true)
-        {
-            isRotating = false;
-        }
+        // Checks collisons 
+        CollisionChecker();
         
-
     }
 
-    
     private void Polefalling()
     {
         if (Input.GetKeyUp(KeyCode.Space) && !isSpacePressed)
@@ -73,9 +60,7 @@ public class PoleScript : MonoBehaviour
         {
             transform.RotateAround(CustomPivot.position, Vector3.back, rotationSpeed * Time.deltaTime);
             PipeCollider.transform.RotateAround(CustomPivot.position, Vector3.back, rotationSpeed * Time.deltaTime);
-
         }
-       
     }
 
     private void PoleExtention()
@@ -83,12 +68,9 @@ public class PoleScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             isExtending = true;
-            
         }
         if (!isSpacePressed && isExtending)
         {
-          
-            
             NextLength += new Vector3(0f, 1f);
             NextVert += new Vector3(0f, 0.5f);
 
@@ -101,8 +83,15 @@ public class PoleScript : MonoBehaviour
             // Changes the scale and position of the pole so it moves vertically only.
             transform.localScale = NewLength;
             transform.position = NewVert;
-            PipeCollider.transform.position = NewColliderVert;
-            
+            PipeCollider.transform.position = NewColliderVert; 
+        }
+    }
+
+    void CollisionChecker()
+    {
+        if (PipeCollider.GetComponent<PoleCollisionScript>().CollisionCheck == true)
+        {
+            isRotating = false;
         }
     }
 }
