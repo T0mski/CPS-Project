@@ -72,18 +72,20 @@ public class PoleScript : MonoBehaviour
         if (!isSpacePressed && isExtending)
         {
             NextLength += new Vector3(0f, 1f);
+            NextColliderVert += new Vector3(0f, 1f);
             NextVert += new Vector3(0f, 0.5f);
+           
 
             NewLength = new Vector3(10f, 100f) + NextLength;
             NewVert = new Vector3(200f, 465f) + NextVert;
-
-            NextColliderVert += new Vector3(0f, 1f);
             NewColliderVert = new Vector3(200f, 515f) + NextColliderVert;
 
             // Changes the scale and position of the pole so it moves vertically only.
             transform.localScale = NewLength;
             transform.position = NewVert;
-            PipeCollider.transform.position = NewColliderVert; 
+            PipeCollider.transform.position = NewColliderVert;
+
+          
         }
     }
 
