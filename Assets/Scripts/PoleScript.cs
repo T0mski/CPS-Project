@@ -15,7 +15,7 @@ public class PoleScript : MonoBehaviour
     public bool isRotating = false;  
     private bool isExtending = false;
     private bool isSpacePressed = false;
-
+    
     // declares all the variables for the extention of the pole.
     private Vector3 NextLength;
     private Vector3 NewLength;
