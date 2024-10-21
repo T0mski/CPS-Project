@@ -35,6 +35,7 @@ public class PoleScript : MonoBehaviour
     {
         //gets the current position at the start of the game for debuging.
         CurenrtPos = PipeCollider.transform.position;
+        Debug.Log(gameObject.transform.rotation.z);
     }
 
     // Update fucntion called every game tick.
@@ -105,17 +106,14 @@ public class PoleScript : MonoBehaviour
 
     void OnBuilding()
     {
-        if (gameObject.transform.rotation.z < -85 && gameObject.transform.rotation.z > -95)
+        if (gameObject.transform.rotation.z < -0.70f && gameObject.transform.rotation.z > -0.75f)
         {
-            Debug.Log(gameObject.transform.rotation.z);
             Debug.Log("Correct orientation");
         }
 
         else
         {
-            Debug.Log(gameObject.transform.rotation.z);
             Debug.Log("Nope");
-
         }
     }
 }
