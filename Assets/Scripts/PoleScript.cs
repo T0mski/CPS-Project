@@ -29,6 +29,8 @@ public class PoleScript : MonoBehaviour
 
     public GameObject PipeCollider;
     
+
+
     private void Start()
     {
         //gets the current position at the start of the game for debuging.
@@ -44,6 +46,8 @@ public class PoleScript : MonoBehaviour
         PoleExtention();
         // Checks collisons 
         CollisionChecker();
+       
+        
         
     }
 
@@ -94,6 +98,24 @@ public class PoleScript : MonoBehaviour
         if (PipeCollider.GetComponent<PoleCollisionScript>().CollisionCheck == true)
         {
             isRotating = false;
+            // checks if the pole has landed on the next building correctly.
+            OnBuilding();
+        }
+    }
+
+    void OnBuilding()
+    {
+        if (gameObject.transform.rotation.z < -85 && gameObject.transform.rotation.z > -95)
+        {
+            Debug.Log(gameObject.transform.rotation.z);
+            Debug.Log("Correct orientation");
+        }
+
+        else
+        {
+            Debug.Log(gameObject.transform.rotation.z);
+            Debug.Log("Nope");
+
         }
     }
 }
