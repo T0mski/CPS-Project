@@ -11,7 +11,7 @@ public class PoleScript : MonoBehaviour
 {
     // declares the variables
     public float rotationSpeed = 100f;
-    public float extentionSpeed = 1000f;
+    public float extentionSpeed = 0.01f;
     public bool isRotating = false;  
     private bool isExtending = false;
     private bool isSpacePressed = false;
@@ -28,15 +28,11 @@ public class PoleScript : MonoBehaviour
     public Transform CustomPivot;
 
     public GameObject PipeCollider;
+    public GameObject PlayerCharacter;
     
 
 
-    private void Start()
-    {
-        //gets the current position at the start of the game for debuging.
-        CurenrtPos = PipeCollider.transform.position;
-        Debug.Log(gameObject.transform.rotation.z);
-    }
+ 
 
     // Update fucntion called every game tick.
     private void Update()
@@ -76,10 +72,10 @@ public class PoleScript : MonoBehaviour
         }
         if (!isSpacePressed && isExtending)
         {
-            NextLength += new Vector3(0f, 1f);
-            NextColliderVert += new Vector3(0f, 1f);
-            NextVert += new Vector3(0f, 0.5f);
-           
+
+            NextLength.y += 100f * Time.deltaTime;
+            NextColliderVert.y += 100f * Time.deltaTime;
+            NextVert.y += (100f / 2) * Time.deltaTime;
 
             NewLength = new Vector3(10f, 100f) + NextLength;
             NewVert = new Vector3(200f, 465f) + NextVert;
@@ -109,6 +105,9 @@ public class PoleScript : MonoBehaviour
         if (gameObject.transform.rotation.z < -0.70f && gameObject.transform.rotation.z > -0.75f)
         {
             Debug.Log("Correct orientation");
+            PlayerCharacter.GetComponent<CharacterScript>().GetTargetPos();
+            PlayerCharacter.GetComponent<CharacterScript>().PlayerMove();
+
         }
 
         else
