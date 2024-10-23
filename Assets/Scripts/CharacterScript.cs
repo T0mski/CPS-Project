@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.XR.Haptics;
 
@@ -15,23 +16,25 @@ public class CharacterScript : MonoBehaviour
     private void Start()
     {
         target = tower.transform;
+        GetTargetPos();
     }
 
     public void GetTargetPos()
     {
         if (target != null)
         {
-            targetpos = transform.position + (tower.transform.localPosition/2);
+            targetpos = tower.transform.position;
+            targetpos.y += tower.transform.position.y + GameObject.Find("Character").transform.localScale.y;
         }
     }
 
    public void PlayerMove()
     {
         float step = speed * Time.deltaTime;
-        Debug.Log(step);
-        Debug.Log(Time.deltaTime);
-        Debug.Log(speed);
-        
         transform.position = Vector3.MoveTowards(transform.position, targetpos, step);
+        if (transform.position == targetpos)
+        {
+            GameObject.Find("PoleCollider").GetComponent<PoleCollisionScript>().CollisionCheck = false;
+        }
     }
 }

@@ -103,16 +103,14 @@ public class PoleScript : MonoBehaviour
     void OnBuilding()
     {
         if (gameObject.transform.rotation.z < -0.70f && gameObject.transform.rotation.z > -0.75f)
-        {
-            Debug.Log("Correct orientation");
-            PlayerCharacter.GetComponent<CharacterScript>().GetTargetPos();
+        { 
             PlayerCharacter.GetComponent<CharacterScript>().PlayerMove();
 
         }
 
         else
         {
-            Debug.Log("Nope");
+            
         }
     }
 }
