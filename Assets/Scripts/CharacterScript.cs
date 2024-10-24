@@ -12,11 +12,20 @@ public class CharacterScript : MonoBehaviour
     public float speed = 10000.0f;
     private Vector3 targetpos;
     public GameObject tower;
+    private bool colliding = false;
 
     private void Start()
     {
         target = tower.transform;
         GetTargetPos();
+    }
+    private void Update()
+    {
+        if (!colliding)
+        {
+            gravity();
+        }
+             
     }
 
     public void GetTargetPos()
@@ -35,6 +44,20 @@ public class CharacterScript : MonoBehaviour
         if (transform.position == targetpos)
         {
             GameObject.Find("PoleCollider").GetComponent<PoleCollisionScript>().CollisionCheck = false;
+        }
+    }
+    
+
+    private void gravity()
+    {
+        transform.position.y += -9.8f * Time.deltaTime
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject != null)
+        {
+            colliding = true;
         }
     }
 }
