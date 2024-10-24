@@ -9,10 +9,11 @@ using UnityEngine.InputSystem.XR.Haptics;
 public class CharacterScript : MonoBehaviour
 {
     public Transform target;
-    public float speed = 10000.0f;
+    public float speed;
     private Vector3 targetpos;
     public GameObject tower;
     private bool colliding = false;
+    private Vector3 ThisObject;
 
     private void Start()
     {
@@ -25,9 +26,10 @@ public class CharacterScript : MonoBehaviour
         {
             gravity();
         }
+        
              
     }
-
+    
     public void GetTargetPos()
     {
         if (target != null)
@@ -41,6 +43,7 @@ public class CharacterScript : MonoBehaviour
     {
         float step = speed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, targetpos, step);
+        gravity();
         if (transform.position == targetpos)
         {
             GameObject.Find("PoleCollider").GetComponent<PoleCollisionScript>().CollisionCheck = false;
@@ -50,7 +53,9 @@ public class CharacterScript : MonoBehaviour
 
     private void gravity()
     {
-        transform.position.y += -9.8f * Time.deltaTime
+        ThisObject = transform.position;
+        ThisObject.y += -9.8f * Time.deltaTime;
+        transform.position = ThisObject;
     }
 
     private void OnCollisionEnter2D(Collision2D other)
