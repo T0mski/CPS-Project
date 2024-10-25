@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.XR.Haptics;
@@ -15,6 +16,7 @@ public class CharacterScript : MonoBehaviour
     public GameObject tower; // the game object of the next building to get the target.
     private bool colliding = false; // Whether or not the player is colliding witht the ground.
     private Vector3 ThisObject; // A variable of the 3D Vector of this game objects location.
+    private bool HasFallenDown = false;
 
     // This function is called at the start of the game and only at the start of the game. 
     private void Start()
@@ -29,7 +31,7 @@ public class CharacterScript : MonoBehaviour
         {
             gravity();
         }
-        
+        HasFallen();
              
     }
     // sets the target position of the player so that it can move to the next building. 
@@ -45,10 +47,21 @@ public class CharacterScript : MonoBehaviour
    public void PlayerMove()
     {
         float step = speed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, targetpos, step);
-        if (transform.position == targetpos)
+        float targetposX = targetpos.x; 
+        float currentposX = transform.position.x;
+        float currentposY = transform.position.y;
+        /*transform.position = Vector3.MoveTowards(transform.position, targetpos, step); The unity MoveTowards Command Didnt allow me to do what i wanted so i crated the 
+        MoveTo command to only move the X value*/
+        float nextX = MoveTo(currentposX, targetposX, step);
+        if (!HasFallenDown)
         {
-            GameObject.Find("PoleCollider").GetComponent<PoleCollisionScript>().CollisionCheck = false;
+            transform.position = new Vector3(nextX, currentposY);
+            gravity();
+            if (transform.position == targetpos)
+            {
+
+                GameObject.Find("PoleCollider").GetComponent<PoleCollisionScript>().CollisionCheck = false;
+            }
         }
     }
     
@@ -62,9 +75,33 @@ public class CharacterScript : MonoBehaviour
     //Checks the collisions between the two game objects.
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject != null)
+     if (other.gameObject == GameObject.Find("Tower"))
         {
             colliding = true;
         }
     }
+    // My adaptation of the Unity Vector3.MoveTowards function but only affects 1 direction.
+    private float MoveTo(float CurrentPos, float TargetPos, float MaxStep)
+    {
+        float num = TargetPos - CurrentPos;
+        float num2 = num * num;
+
+        if (num2 == 0f || (MaxStep >= 0f && num2 <= MaxStep * MaxStep))
+        {
+            return TargetPos;
+        }
+
+        float num3 = (float)Math.Sqrt(num2);
+        return (CurrentPos + num / num3 * MaxStep); 
+    }
+
+
+    private void HasFallen()
+    {
+        if (transform.position.y < 455f)
+        {
+            HasFallenDown = true;
+        }
+    }
+
 }

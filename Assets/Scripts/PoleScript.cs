@@ -42,10 +42,7 @@ public class PoleScript : MonoBehaviour
         // calls the PoleExtention Functuion every game tick.
         PoleExtention();
         // Checks collisons 
-        CollisionChecker();
-       
-        
-        
+        CollisionChecker();        
     }
 
     private void Polefalling()
@@ -110,7 +107,7 @@ public class PoleScript : MonoBehaviour
 
         else
         {
-            
+            PlayerCharacter.GetComponent<CharacterScript>().PlayerMove();
         }
     }
 }
