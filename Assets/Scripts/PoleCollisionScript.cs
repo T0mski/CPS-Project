@@ -13,7 +13,6 @@ public class PoleCollisionScript : MonoBehaviour
         if (other.gameObject.tag == "Building")
         {
             CollisionCheck = true;
-            Debug.Log("Is Colliding ");
         }
     }
 } 

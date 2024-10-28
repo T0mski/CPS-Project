@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class BuildingMoveScript : MonoBehaviour
 {
-    public float movespeed = 20f;
-
-
+    
+    private GameObject building;
+    private Vector3 ThisObject;
     private void Update()
     {
-         transform.position = transform.position + ((Vector3.left * movespeed) * Time.deltaTime);
+        ReverseGravity();
     }
-
+    private void ReverseGravity()
+    {
+        ThisObject = transform.position;
+        ThisObject.y += 9.8f * Time.deltaTime;
+        transform.position = ThisObject;
+    }
 
       
 

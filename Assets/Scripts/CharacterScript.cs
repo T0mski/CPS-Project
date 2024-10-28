@@ -66,7 +66,7 @@ public class CharacterScript : MonoBehaviour
     }
     
     // moves the player down by a specific amount of pixels every frame. Acts as gravity.
-    private void gravity()
+    public void gravity()
     {
         ThisObject = transform.position;
         ThisObject.y += -9.8f * Time.deltaTime;
