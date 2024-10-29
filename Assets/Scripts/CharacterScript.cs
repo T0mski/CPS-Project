@@ -75,7 +75,7 @@ public class CharacterScript : MonoBehaviour
     //Checks the collisions between the two game objects.
     private void OnCollisionEnter2D(Collision2D other)
     {
-     if (other.gameObject == GameObject.Find("Tower"))
+     if (other.gameObject != null)
         {
             colliding = true;
         }
@@ -92,9 +92,8 @@ public class CharacterScript : MonoBehaviour
         }
 
         float num3 = (float)Math.Sqrt(num2);
-        return (CurrentPos + num / num3 * MaxStep); 
+        return (CurrentPos + num / num3 * MaxStep);
     }
-
 
     private void HasFallen()
     {
@@ -103,5 +102,4 @@ public class CharacterScript : MonoBehaviour
             HasFallenDown = true;
         }
     }
-
 }
