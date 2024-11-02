@@ -23,6 +23,7 @@ public class CharacterScript : MonoBehaviour
     {
         target = tower.transform;
         GetTargetPos();
+        
     }
     //This is the function that is called every game frame.
     private void Update()
@@ -58,8 +59,7 @@ public class CharacterScript : MonoBehaviour
             transform.position = new Vector3(nextX, currentposY);
             gravity();
             if (transform.position == targetpos)
-            {
-
+            { 
                 GameObject.Find("PoleCollider").GetComponent<PoleCollisionScript>().CollisionCheck = false;
             }
         }
@@ -73,9 +73,9 @@ public class CharacterScript : MonoBehaviour
         transform.position = ThisObject;
     }
     //Checks the collisions between the two game objects.
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-     if (other.gameObject != null)
+        if (other.gameObject != null)
         {
             colliding = true;
         }
@@ -97,7 +97,7 @@ public class CharacterScript : MonoBehaviour
 
     private void HasFallen()
     {
-        if (transform.position.y < 455f)
+        if (transform.position.y < 450f && GameObject.Find("PoleCollider").GetComponent<PoleCollisionScript>().CollisionType == "Building")
         {
             HasFallenDown = true;
         }
