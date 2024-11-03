@@ -17,6 +17,7 @@ public class CharacterScript : MonoBehaviour
     private bool colliding = false; // Whether or not the player is colliding witht the ground.
     private Vector3 ThisObject; // A variable of the 3D Vector of this game objects location.
     private bool HasFallenDown = false;
+    public bool IsMoving;
 
     // This function is called at the start of the game and only at the start of the game. 
     private void Start()
@@ -28,12 +29,9 @@ public class CharacterScript : MonoBehaviour
     //This is the function that is called every game frame.
     private void Update()
     {
-        if (!colliding)
-        {
-            gravity();
-        }
+        gravity();
         HasFallen();
-             
+        PlayerMove();
     }
     // sets the target position of the player so that it can move to the next building. 
     public void GetTargetPos()
@@ -45,22 +43,26 @@ public class CharacterScript : MonoBehaviour
         }
     }
     // the function that is called when the player moves towards the targetpos
-   public void PlayerMove()
+    public void PlayerMove()
     {
-        float step = speed * Time.deltaTime;
-        float targetposX = targetpos.x; 
-        float currentposX = transform.position.x;
-        float currentposY = transform.position.y;
-        /*transform.position = Vector3.MoveTowards(transform.position, targetpos, step); The unity MoveTowards Command Didnt allow me to do what i wanted so i crated the 
-        MoveTo command to only move the X value*/
-        float nextX = MoveTo(currentposX, targetposX, step);
-        if (!HasFallenDown)
+        if (IsMoving)
         {
-            transform.position = new Vector3(nextX, currentposY);
-            gravity();
-            if (transform.position == targetpos)
-            { 
-                GameObject.Find("PoleCollider").GetComponent<PoleCollisionScript>().CollisionCheck = false;
+            float step = speed * Time.deltaTime;
+            float targetposX = targetpos.x;
+            float currentposX = transform.position.x;
+            float currentposY = transform.position.y;
+            /*transform.position = Vector3.MoveTowards(transform.position, targetpos, step); The unity MoveTowards Command Didnt allow me to do what i wanted so i crated the 
+            MoveTo command to only move the X value*/
+            float nextX = MoveTo(currentposX, targetposX, step);
+            if (!HasFallenDown)
+            {
+                transform.position = new Vector3(nextX, currentposY);
+                gravity();
+                if (transform.position == targetpos)
+                {
+                    GameObject.Find("PoleCollider").GetComponent<PoleCollisionScript>().CollisionCheck = false;
+                }
+
             }
         }
     }
@@ -68,9 +70,12 @@ public class CharacterScript : MonoBehaviour
     // moves the player down by a specific amount of pixels every frame. Acts as gravity.
     public void gravity()
     {
-        ThisObject = transform.position;
-        ThisObject.y += -9.8f * Time.deltaTime;
-        transform.position = ThisObject;
+        if (!colliding)
+        {
+            ThisObject = transform.position;
+            ThisObject.y += -9.8f * Time.deltaTime;
+            transform.position = ThisObject;
+        }
     }
     //Checks the collisions between the two game objects.
     private void OnTriggerEnter2D(Collider2D other)
@@ -78,6 +83,14 @@ public class CharacterScript : MonoBehaviour
         if (other.gameObject != null)
         {
             colliding = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject != null)
+        {
+            colliding = false;
         }
     }
     // My adaptation of the Unity Vector3.MoveTowards function but only affects 1 direction.

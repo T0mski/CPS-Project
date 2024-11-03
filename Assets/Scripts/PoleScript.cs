@@ -101,13 +101,13 @@ public class PoleScript : MonoBehaviour
     {
         if (gameObject.transform.rotation.z < -0.70f && gameObject.transform.rotation.z > -0.75f)
         { 
-            PlayerCharacter.GetComponent<CharacterScript>().PlayerMove();
+            PlayerCharacter.GetComponent<CharacterScript>().IsMoving = true;
 
         }
 
         else
         {
-            PlayerCharacter.GetComponent<CharacterScript>().PlayerMove();
+            PlayerCharacter.GetComponent<CharacterScript>().IsMoving = true;
         }
     }
 }
