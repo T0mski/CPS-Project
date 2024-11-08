@@ -61,10 +61,12 @@ public class CharacterScript : MonoBehaviour
                 if (transform.position == targetpos)
                 {
                     GameObject.Find("PoleCollider").GetComponent<PoleCollisionScript>().CollisionCheck = false;
+                    IsMoving = false;
                 }
 
             }
         }
+        
     }
     
     // moves the player down by a specific amount of pixels every frame. Acts as gravity.
@@ -114,5 +116,6 @@ public class CharacterScript : MonoBehaviour
         {
             HasFallenDown = true;
         }
+        
     }
 }

@@ -14,7 +14,7 @@ public class MainGameScript : MonoBehaviour
 
     void SpawnBuilding()
     {
-        RandomNum = Random.Range(1, nextMult.Length);
+        RandomNum = Random.Range(0, nextMult.Length);
         Multiplyer = nextMult[RandomNum];
         
         Vector3 scale = Building.transform.localScale;

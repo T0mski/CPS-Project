@@ -42,7 +42,18 @@ public class PoleScript : MonoBehaviour
         // calls the PoleExtention Functuion every game tick.
         PoleExtention();
         // Checks collisons 
-        CollisionChecker();        
+        CollisionChecker();
+
+        if (GameObject.Find("PoleCollider").GetComponent<PoleCollisionScript>().CollisionType == "NextBuilding")
+        {
+            Quaternion nextRotation = gameObject.transform.rotation;
+            nextRotation.z = -0.7f;
+            gameObject.transform.rotation = nextRotation;
+            
+
+
+        }
+     
     }
 
     private void Polefalling()
