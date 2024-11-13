@@ -18,20 +18,27 @@ public class CharacterScript : MonoBehaviour
     private Vector3 ThisObject; // A variable of the 3D Vector of this game objects location.
     private bool HasFallenDown = false;
     public bool IsMoving;
+    public bool AllowedToFall;
 
     // This function is called at the start of the game and only at the start of the game. 
     private void Start()
     {
         target = tower.transform;
         GetTargetPos();
+       
         
     }
     //This is the function that is called every game frame.
     private void Update()
     {
-        gravity();
+        if (AllowedToFall)
+        {
+            gravity();
+        }
+
         HasFallen();
         PlayerMove();
+        Debug.Log(IsMoving);
     }
     // sets the target position of the player so that it can move to the next building. 
     public void GetTargetPos()
@@ -57,14 +64,18 @@ public class CharacterScript : MonoBehaviour
             if (!HasFallenDown)
             {
                 transform.position = new Vector3(nextX, currentposY);
-                gravity();
                 if (transform.position == targetpos)
                 {
                     GameObject.Find("PoleCollider").GetComponent<PoleCollisionScript>().CollisionCheck = false;
-                    IsMoving = false;
                 }
 
             }
+
+            if (transform.position.x == targetpos.x)
+            {
+                IsMoving = false;
+            }
+
         }
         
     }
@@ -75,7 +86,7 @@ public class CharacterScript : MonoBehaviour
         if (!colliding)
         {
             ThisObject = transform.position;
-            ThisObject.y += -9.8f * Time.deltaTime;
+            ThisObject.y += (2 * -9.8f) * Time.deltaTime;
             transform.position = ThisObject;
         }
     }
