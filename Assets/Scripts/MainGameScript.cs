@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
 public class MainGameScript : MonoBehaviour
@@ -15,6 +17,7 @@ public class MainGameScript : MonoBehaviour
     private float nextScaleX;
     public GameObject Character;
     public GameObject Target;
+    private bool DoneOnce = true;
 
     void SpawnBuilding()
     {
@@ -27,12 +30,20 @@ public class MainGameScript : MonoBehaviour
         Instantiate(Building, transform.position, transform.rotation);
     }
 
+    private void MoveAll()
+    {
+
+    }
+    
+
 
     private void Update()
     {
-        if (Character.transform.position.x == Target.transform.position.x)
+        if (Character.transform.position.x == 550f && !DoneOnce)
         {
-            Debug.Log("its working");
+            SpawnBuilding();
+            MoveAll();
+            DoneOnce = false;
         }
        
 
