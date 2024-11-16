@@ -38,7 +38,6 @@ public class CharacterScript : MonoBehaviour
 
         HasFallen();
         PlayerMove();
-        Debug.Log(IsMoving);
     }
     // sets the target position of the player so that it can move to the next building. 
     public void GetTargetPos()

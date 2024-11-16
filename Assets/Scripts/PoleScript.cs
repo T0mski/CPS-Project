@@ -29,10 +29,14 @@ public class PoleScript : MonoBehaviour
 
     public GameObject PipeCollider;
     public GameObject PlayerCharacter;
-    
+
+    private Vector3 Scale;
+    private Quaternion Rotation;
+    private Vector3 Position;
+    private Vector3 RelativeToPlayer_Position;
 
 
- 
+
 
     // Update fucntion called every game tick.
     private void Update()
@@ -54,6 +58,17 @@ public class PoleScript : MonoBehaviour
 
         }
      
+    }
+    private void Start()
+    {
+        //Get the starting atrebutes for all of the areas of the pole.
+        Scale = transform.localScale;
+        Rotation = transform.rotation;
+        Position = transform.position;
+         
+        RelativeToPlayer_Position = Position - PlayerCharacter.transform.position;
+
+
     }
 
     private void Polefalling()
@@ -96,6 +111,17 @@ public class PoleScript : MonoBehaviour
 
           
         }
+    }
+
+    public void ResetPole()
+    {
+        transform.localScale = Scale;
+        transform.rotation = Rotation;
+        transform.position = RelativeToPlayer_Position;
+
+        Debug.Log(Scale);
+        Debug.Log(Rotation);
+        Debug.Log(RelativeToPlayer_Position);
     }
 
     void CollisionChecker()

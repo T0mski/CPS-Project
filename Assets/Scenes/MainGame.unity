@@ -960,9 +960,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bae64d2db39e1ea4f8e1878915c1855c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Building: {fileID: 2194286675433816482, guid: 3643982eb9e523549b403cc673420df4, type: 3}
+  Tower: {fileID: 2194286675433816482, guid: 3643982eb9e523549b403cc673420df4, type: 3}
   Character: {fileID: 85493005}
   Target: {fileID: 983740670}
+  Player: {fileID: 1398154736}
 --- !u!1001 &5267897659173123849
 PrefabInstance:
   m_ObjectHideFlags: 0
