@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UI;
@@ -33,8 +34,11 @@ public class PoleScript : MonoBehaviour
     private Vector3 Scale;
     private Quaternion Rotation;
     private Vector3 Position;
-    private Vector3 RelativeToPlayer_Position;
-    private bool HasRotated;
+
+    private Quaternion ColliderRot;
+    private Vector3 ColliderPos;
+
+    private bool HasReset;
 
 
 
@@ -48,13 +52,14 @@ public class PoleScript : MonoBehaviour
         // Checks collisons 
         CollisionChecker();
 
-        if (GameObject.Find("PoleCollider").GetComponent<PoleCollisionScript>().CollisionType == "NextBuilding" && !HasRotated)
+        if (GameObject.Find("PoleCollider").GetComponent<PoleCollisionScript>().CollisionType == "NextBuilding" && !HasReset)
         {
             //Quaternion nextRotation = gameObject.transform.rotation;
             //nextRotation.Set(0.7f, 0f , 0f, 1f );
             
-            transform.rotation = Quaternion.Euler(0, 0, 90);
-            HasRotated = true;
+            transform.rotation = Quaternion.Euler(0f,0f,90f);
+            PipeCollider.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+            HasReset = true;
             
 
 
@@ -67,11 +72,13 @@ public class PoleScript : MonoBehaviour
         Scale = transform.localScale;
         Rotation = transform.rotation;
         Position = transform.position;
-         
-        RelativeToPlayer_Position = Position - PlayerCharacter.transform.position;
+
+        ColliderPos = PipeCollider.transform.position;
+        ColliderRot = PipeCollider.transform.rotation;
 
 
-    }
+
+}
 
     private void Polefalling()
     {
@@ -119,13 +126,14 @@ public class PoleScript : MonoBehaviour
     {
         transform.localScale = Scale;
         transform.position = Position;
-        transform.rotation *= Quaternion.Euler(0,0,90);
-       
+        transform.rotation *= new Quaternion(0f, 0f, 0f, 0f);
+        float ScaleY = Scale.y;
 
-        Debug.Log(Scale);
-        Debug.Log(Rotation);
-        Debug.Log(RelativeToPlayer_Position);
-        HasRotated = false;
+        
+        PipeCollider.transform.rotation *= new Quaternion(0f, 0f, 0f, 0f);
+        PipeCollider.transform.position = ColliderPos;
+
+        
     }
 
     void CollisionChecker()
