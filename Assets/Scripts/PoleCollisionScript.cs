@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PoleCollisionScript : MonoBehaviour
@@ -27,5 +28,11 @@ public class PoleCollisionScript : MonoBehaviour
             Character.GetComponent<CharacterScript>().AllowedToFall = true;
             Debug.Log(Character.GetComponent<CharacterScript>().AllowedToFall);
         }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        CollisionCheck = false;
+        CollisionType = null; 
     }
 } 

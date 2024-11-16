@@ -34,7 +34,7 @@ public class PoleScript : MonoBehaviour
     private Quaternion Rotation;
     private Vector3 Position;
     private Vector3 RelativeToPlayer_Position;
-
+    private bool HasRotated;
 
 
 
@@ -48,11 +48,13 @@ public class PoleScript : MonoBehaviour
         // Checks collisons 
         CollisionChecker();
 
-        if (GameObject.Find("PoleCollider").GetComponent<PoleCollisionScript>().CollisionType == "NextBuilding")
+        if (GameObject.Find("PoleCollider").GetComponent<PoleCollisionScript>().CollisionType == "NextBuilding" && !HasRotated)
         {
-            Quaternion nextRotation = gameObject.transform.rotation;
-            nextRotation.z = -0.7f;
-            gameObject.transform.rotation = nextRotation;
+            //Quaternion nextRotation = gameObject.transform.rotation;
+            //nextRotation.Set(0.7f, 0f , 0f, 1f );
+            
+            transform.rotation = Quaternion.Euler(0, 0, 90);
+            HasRotated = true;
             
 
 
@@ -116,12 +118,14 @@ public class PoleScript : MonoBehaviour
     public void ResetPole()
     {
         transform.localScale = Scale;
-        transform.rotation = Rotation;
-        transform.position = RelativeToPlayer_Position;
+        transform.position = Position;
+        transform.rotation *= Quaternion.Euler(0,0,90);
+       
 
         Debug.Log(Scale);
         Debug.Log(Rotation);
         Debug.Log(RelativeToPlayer_Position);
+        HasRotated = false;
     }
 
     void CollisionChecker()
