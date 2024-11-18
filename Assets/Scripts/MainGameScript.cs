@@ -35,7 +35,7 @@ public class MainGameScript : MonoBehaviour
 
     private void MoveAll()
     {
-        Player.GetComponentInChildren<PoleScript>().ResetPole();
+        Player.GetComponentInChildren<PoleScript>().ResetPoleToPlayer();
         /*
             Vector3 player = Player.transform.position;
         player.x -= 10f;

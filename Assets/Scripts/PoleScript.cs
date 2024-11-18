@@ -136,6 +136,20 @@ public class PoleScript : MonoBehaviour
         
     }
 
+    public void ResetPoleToPlayer()
+    {
+        transform.localScale = Scale;
+        transform.position = PlayerCharacter.transform.position + new Vector3(50,0,0);
+        transform.rotation *= new Quaternion(0f, 0f, 0f, 0f);
+        float ScaleY = Scale.y;
+
+
+        PipeCollider.transform.rotation *= new Quaternion(0f, 0f, 0f, 0f);
+        PipeCollider.transform.position = PlayerCharacter.transform.position + new Vector3(50, 50, 0);
+
+
+    }
+
     void CollisionChecker()
     {
         if (PipeCollider.GetComponent<PoleCollisionScript>().CollisionCheck == true)
