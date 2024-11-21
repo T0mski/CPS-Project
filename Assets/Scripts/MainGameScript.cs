@@ -20,6 +20,8 @@ public class MainGameScript : MonoBehaviour
     public GameObject Target;
     public GameObject Player;
 
+    private GameObject CurrentBuilding;
+
     private bool DoneOnce = true;
 
 
@@ -33,8 +35,10 @@ public class MainGameScript : MonoBehaviour
         transform.localScale = scale;
         Instantiate(Tower, transform.position, transform.rotation);
 
-        
+       
     }
+
+   
 
     private void OnBecameInvisible()
     {
@@ -45,6 +49,10 @@ public class MainGameScript : MonoBehaviour
     private void MoveAll()
     {
         Player.GetComponentInChildren<PoleScript>().ResetPoleToPlayer();
+        GameObject MainCamera = GameObject.Find("Main Camera");
+        float MainCameraX = MainCamera.transform.position.x;
+        MainCameraX += 400f;
+        MainCamera.transform.position = new Vector3(MainCameraX, MainCamera.transform.position.y, MainCamera.transform.position.z);
     }
     
 
@@ -57,9 +65,19 @@ public class MainGameScript : MonoBehaviour
             SpawnBuilding();
             DoneOnce = false;
         }
-       
 
-       
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            OnTriggerEnter2D(GameObject.Find("Building").GetComponent<Collider2D>());
+            CurrentBuilding.name = "PreviousBuilding";
+        }
+        
+
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        CurrentBuilding = other.gameObject;
+        Debug.Log(CurrentBuilding);
     }
 
 }
