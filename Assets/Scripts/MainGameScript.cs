@@ -22,6 +22,7 @@ public class MainGameScript : MonoBehaviour
 
     private bool DoneOnce = true;
 
+
     void SpawnBuilding()
     {
         RandomNum = Random.Range(0, nextMult.Length);
@@ -31,16 +32,19 @@ public class MainGameScript : MonoBehaviour
         scale.x = scale.x * Multiplyer;
         transform.localScale = scale;
         Instantiate(Tower, transform.position, transform.rotation);
+
+        
+    }
+
+    private void OnBecameInvisible()
+    {
+       GameObject PrevousBuilding = GameObject.Find("PreviousBuilding");
+        Destroy(PrevousBuilding);
     }
 
     private void MoveAll()
     {
         Player.GetComponentInChildren<PoleScript>().ResetPoleToPlayer();
-        /*
-            Vector3 player = Player.transform.position;
-        player.x -= 10f;
-        Player.transform.position = player;
-        */
     }
     
 
