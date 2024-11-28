@@ -24,6 +24,8 @@ public class MainGameScript : MonoBehaviour
 
     private bool DoneOnce = true;
 
+    public float Deadzone = -100f;
+
 
     void SpawnBuilding()
     {
@@ -36,14 +38,6 @@ public class MainGameScript : MonoBehaviour
         Instantiate(Tower, transform.position, transform.rotation);
 
        
-    }
-
-   
-
-    private void OnBecameInvisible()
-    {
-       GameObject PrevousBuilding = GameObject.Find("PreviousBuilding");
-        Destroy(PrevousBuilding);
     }
 
     private void MoveAll()
@@ -71,8 +65,18 @@ public class MainGameScript : MonoBehaviour
             OnTriggerEnter2D(GameObject.Find("Building").GetComponent<Collider2D>());
             CurrentBuilding.name = "PreviousBuilding";
         }
+        if (CurrentBuilding.transform.position.x <= Deadzone)
+        {
+            Destroy(CurrentBuilding);
+        }
+
         
 
+    }
+
+    private void Start()
+    {
+        CurrentBuilding = GameObject.FindWithTag("Building");
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
