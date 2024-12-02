@@ -13,10 +13,10 @@ public class PoleScript : MonoBehaviour
     // declares the variables
     public float rotationSpeed = 100f;
     public float extentionSpeed = 0.01f;
-    public bool isRotating = false;  
+    public bool isRotating = false;
     private bool isExtending = false;
     private bool isSpacePressed = false;
-    
+
     // declares all the variables for the extention of the pole.
     private Vector3 NextLength;
     private Vector3 NewLength;
@@ -56,15 +56,15 @@ public class PoleScript : MonoBehaviour
         {
             //Quaternion nextRotation = gameObject.transform.rotation;
             //nextRotation.Set(0.7f, 0f , 0f, 1f );
-            
-            transform.rotation = Quaternion.Euler(0f,0f,90f);
+
+            transform.rotation = Quaternion.Euler(0f, 0f, 90f);
             PipeCollider.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
             HasReset = true;
-            
+
 
 
         }
-     
+
     }
     private void Start()
     {
@@ -78,7 +78,20 @@ public class PoleScript : MonoBehaviour
 
 
 
-}
+    }
+    public void Restart()
+    {
+        Scale = transform.localScale;
+        Rotation = transform.rotation;
+        Position = transform.position;
+
+        ColliderPos = PipeCollider.transform.position;
+        ColliderRot = PipeCollider.transform.rotation;
+
+        isSpacePressed = false;
+        CustomPivot = GameObject.Find("Pivot").transform;
+    }
+
 
     private void Polefalling()
     {

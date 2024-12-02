@@ -44,8 +44,12 @@ public class MainGameScript : MonoBehaviour
     {
         Player.GetComponentInChildren<PoleScript>().ResetPoleToPlayer();
         GameObject MainCamera = GameObject.Find("Main Camera");
+        GameObject Spawner = GameObject.Find("Spawner");
+        float SpawnerX = Spawner.transform.position.x;
         float MainCameraX = MainCamera.transform.position.x;
+        SpawnerX += 400f;
         MainCameraX += 400f;
+        Spawner.transform.position = new Vector3(SpawnerX, Spawner.transform.position.y, Spawner.transform.position.z);
         MainCamera.transform.position = new Vector3(MainCameraX, MainCamera.transform.position.y, MainCamera.transform.position.z);
     }
     
@@ -58,6 +62,7 @@ public class MainGameScript : MonoBehaviour
             MoveAll();
             SpawnBuilding();
             OnBecameInvisible();
+            GameObject.Find("Pole").GetComponent<PoleScript>().Restart();
             DoneOnce = false;
         }
 
