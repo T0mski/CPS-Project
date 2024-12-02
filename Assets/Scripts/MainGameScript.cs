@@ -24,7 +24,7 @@ public class MainGameScript : MonoBehaviour
 
     private bool DoneOnce = true;
 
-    public float Deadzone = -100f;
+    public float Deadzone = -10f;
 
 
     void SpawnBuilding()
@@ -57,6 +57,7 @@ public class MainGameScript : MonoBehaviour
         {
             MoveAll();
             SpawnBuilding();
+            OnBecameInvisible();
             DoneOnce = false;
         }
 
@@ -65,13 +66,16 @@ public class MainGameScript : MonoBehaviour
             OnTriggerEnter2D(GameObject.Find("Building").GetComponent<Collider2D>());
             CurrentBuilding.name = "PreviousBuilding";
         }
-        if (CurrentBuilding.transform.position.x <= Deadzone)
-        {
-            Destroy(CurrentBuilding);
-        }
-
         
 
+        
+        
+
+    }
+    void OnBecameInvisible()
+
+    {
+        Destroy(CurrentBuilding);
     }
 
     private void Start()
