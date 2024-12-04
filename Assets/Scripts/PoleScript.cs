@@ -10,7 +10,7 @@ using UnityEngine;
 
 public class PoleScript : MonoBehaviour
 {
-    // declares the variables
+    // declares the variables.
     public float rotationSpeed = 100f;
     public float extentionSpeed = 0.01f;
     public bool isRotating = false;
@@ -54,8 +54,6 @@ public class PoleScript : MonoBehaviour
 
         if (GameObject.Find("PoleCollider").GetComponent<PoleCollisionScript>().CollisionType == "NextBuilding" && !HasReset)
         {
-            //Quaternion nextRotation = gameObject.transform.rotation;
-            //nextRotation.Set(0.7f, 0f , 0f, 1f );
 
             transform.rotation = Quaternion.Euler(0f, 0f, 90f);
             PipeCollider.transform.rotation = Quaternion.Euler(0f, 0f, 90f);

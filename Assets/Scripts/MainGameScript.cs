@@ -62,13 +62,12 @@ public class MainGameScript : MonoBehaviour
             MoveAll();
             SpawnBuilding();
             OnBecameInvisible();
-            GameObject.Find("Pole").GetComponent<PoleScript>().Restart();
             DoneOnce = false;
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            OnTriggerEnter2D(GameObject.Find("Building").GetComponent<Collider2D>());
+            //OnTriggerEnter2D(GameObject.Find("Tower").GetComponentInChildren<Collider2D>());
             CurrentBuilding.name = "PreviousBuilding";
         }
         
@@ -85,13 +84,13 @@ public class MainGameScript : MonoBehaviour
 
     private void Start()
     {
-        CurrentBuilding = GameObject.FindWithTag("Building");
+        CurrentBuilding = GameObject.Find("What is below.").GetComponent<whatisBelow>().below;
     }
-    private void OnTriggerEnter2D(Collider2D other)
+    /*private void OnTriggerEnter2D(Collider2D other)
     {
         CurrentBuilding = other.gameObject;
         Debug.Log(CurrentBuilding);
-    }
+    }*/
 
 }
 
