@@ -26,7 +26,7 @@ public class PoleScript : MonoBehaviour
     private Vector3 CurenrtPos;
     private Vector3 NewColliderVert;
     private Vector3 NextColliderVert;
-    public Transform CustomPivot;
+    public Transform CustomPivot { get; set; }
 
     public GameObject PipeCollider;
     public GameObject PlayerCharacter;
@@ -45,6 +45,8 @@ public class PoleScript : MonoBehaviour
     // Update fucntion called every game tick.
     private void Update()
     {
+
+        Debug.Log(CustomPivot.position);
         // calls the PoleFalling Functuion every game tick.
         Polefalling();
         // calls the PoleExtention Functuion every game tick.
@@ -74,6 +76,9 @@ public class PoleScript : MonoBehaviour
         ColliderPos = PipeCollider.transform.position;
         ColliderRot = PipeCollider.transform.rotation;
 
+        CustomPivot = GameObject.Find("Pivot").transform;
+        
+
 
 
     }
@@ -88,6 +93,7 @@ public class PoleScript : MonoBehaviour
 
         isSpacePressed = false;
         CustomPivot = GameObject.Find("Pivot").transform;
+    
     }
 
 

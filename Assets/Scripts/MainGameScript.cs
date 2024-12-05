@@ -26,10 +26,7 @@ public class MainGameScript : MonoBehaviour
 
     public float Deadzone = -10f;
 
-    private void Start()
-    {
-        
-    }
+   
 
     void SpawnBuilding()
     {
@@ -67,6 +64,7 @@ public class MainGameScript : MonoBehaviour
             SpawnBuilding();
             OnBecameInvisible();
             DoneOnce = false;
+            GameObject.Find("Pole").GetComponent<PoleScript>().Restart();
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
