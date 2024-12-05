@@ -26,6 +26,10 @@ public class MainGameScript : MonoBehaviour
 
     public float Deadzone = -10f;
 
+    private void Start()
+    {
+        
+    }
 
     void SpawnBuilding()
     {
@@ -67,7 +71,7 @@ public class MainGameScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //OnTriggerEnter2D(GameObject.Find("Tower").GetComponentInChildren<Collider2D>());
+            CurrentBuilding = GameObject.Find("What is below.").GetComponent<whatisBelow>().other;
             CurrentBuilding.name = "PreviousBuilding";
         }
         
@@ -81,16 +85,5 @@ public class MainGameScript : MonoBehaviour
     {
         Destroy(CurrentBuilding);
     }
-
-    private void Start()
-    {
-        CurrentBuilding = GameObject.Find("What is below.").GetComponent<whatisBelow>().below;
-    }
-    /*private void OnTriggerEnter2D(Collider2D other)
-    {
-        CurrentBuilding = other.gameObject;
-        Debug.Log(CurrentBuilding);
-    }*/
-
 }
 
