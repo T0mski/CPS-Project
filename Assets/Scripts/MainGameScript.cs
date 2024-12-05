@@ -83,7 +83,7 @@ public class MainGameScript : MonoBehaviour
     void OnBecameInvisible()
 
     {
-        Destroy(CurrentBuilding);
+        Destroy(GameObject.Find("PreviousBuilding"));
     }
 }
 
