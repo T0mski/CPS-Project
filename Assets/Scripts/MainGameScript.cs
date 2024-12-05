@@ -15,10 +15,11 @@ public class MainGameScript : MonoBehaviour
     private float[] nextMult = new float[7] { 1f, 1.5f, 0.3f, 0.5f, 1.3f, 1.8f, 0.7f };
     private int RandomNum;
     private float Multiplyer;
-    private float nextScaleX;
     public GameObject Character;
     public GameObject Target;
     public GameObject Player;
+
+    public GameObject Pivot;
 
     private GameObject CurrentBuilding;
 
@@ -46,10 +47,13 @@ public class MainGameScript : MonoBehaviour
         Player.GetComponentInChildren<PoleScript>().ResetPoleToPlayer();
         GameObject MainCamera = GameObject.Find("Main Camera");
         GameObject Spawner = GameObject.Find("Spawner");
+        float PivotX = Pivot.transform.position.x;
         float SpawnerX = Spawner.transform.position.x;
         float MainCameraX = MainCamera.transform.position.x;
+        PivotX += 400f;
         SpawnerX += 400f;
         MainCameraX += 400f;
+        Pivot.transform.position = new Vector3(PivotX, Pivot.transform.position.y, Pivot.transform.position.z);
         Spawner.transform.position = new Vector3(SpawnerX, Spawner.transform.position.y, Spawner.transform.position.z);
         MainCamera.transform.position = new Vector3(MainCameraX, MainCamera.transform.position.y, MainCamera.transform.position.z);
     }
@@ -73,10 +77,6 @@ public class MainGameScript : MonoBehaviour
             CurrentBuilding.name = "PreviousBuilding";
         }
         
-
-        
-        
-
     }
     void OnBecameInvisible()
 

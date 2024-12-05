@@ -18,15 +18,12 @@ public class PoleCollisionScript : MonoBehaviour
             CollisionCheck = true;
             CollisionType = other.gameObject.tag;
             Character.GetComponent<CharacterScript>().AllowedToFall = false;
-            Debug.Log(Character.GetComponent<CharacterScript>().AllowedToFall);
-
         }
         else if (other.gameObject.CompareTag("Building"))
         {
             CollisionCheck = true;
             CollisionType = other.gameObject.tag;
-            Character.GetComponent<CharacterScript>().AllowedToFall = true;
-            Debug.Log(Character.GetComponent<CharacterScript>().AllowedToFall);
+            Character.GetComponent<CharacterScript>().AllowedToFall = true; 
         }
     }
 

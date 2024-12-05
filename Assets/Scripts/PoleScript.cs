@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UI;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class PoleScript : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class PoleScript : MonoBehaviour
     private Vector3 NewColliderVert;
     private Vector3 NextColliderVert;
     public Transform CustomPivot { get; set; }
+    
 
     public GameObject PipeCollider;
     public GameObject PlayerCharacter;
@@ -40,19 +42,25 @@ public class PoleScript : MonoBehaviour
 
     private bool HasReset;
 
-
+    
 
     // Update fucntion called every game tick.
     private void Update()
     {
 
-        Debug.Log(CustomPivot.position);
+        
         // calls the PoleFalling Functuion every game tick.
         Polefalling();
         // calls the PoleExtention Functuion every game tick.
         PoleExtention();
         // Checks collisons 
         CollisionChecker();
+        Vector3 vector3 = new Vector3(10f, 100f, 0f);
+        if (gameObject.transform.localScale != vector3)
+        {
+            Debug.Log(gameObject.transform.localScale);
+        }
+        
 
         if (GameObject.Find("PoleCollider").GetComponent<PoleCollisionScript>().CollisionType == "NextBuilding" && !HasReset)
         {
@@ -60,9 +68,6 @@ public class PoleScript : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, 0f, 90f);
             PipeCollider.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
             HasReset = true;
-
-
-
         }
 
     }
@@ -93,7 +98,19 @@ public class PoleScript : MonoBehaviour
 
         isSpacePressed = false;
         CustomPivot = GameObject.Find("Pivot").transform;
-    
+
+        NextLength.y += 0f;
+        NextColliderVert.x += 400f;
+        //NextColliderVert.y = 100f;
+        NextVert.x += 400f;
+       // NextVert.y = 50f;
+
+        NewLength.y = 0f;
+        NewVert.x += 400f;
+        NewColliderVert.x += 400f;
+      // NewColliderVert.y = 100f;
+
+
     }
 
 
@@ -121,7 +138,7 @@ public class PoleScript : MonoBehaviour
         }
         if (!isSpacePressed && isExtending)
         {
-
+            
             NextLength.y += 100f * Time.deltaTime;
             NextColliderVert.y += 100f * Time.deltaTime;
             NextVert.y += (100f / 2) * Time.deltaTime;
@@ -159,6 +176,7 @@ public class PoleScript : MonoBehaviour
         transform.position = PlayerCharacter.transform.position + new Vector3(50,0,0);
         transform.rotation *= new Quaternion(0f, 0f, 0f, 0f);
         float ScaleY = Scale.y;
+
 
 
         PipeCollider.transform.rotation *= new Quaternion(0f, 0f, 0f, 0f);

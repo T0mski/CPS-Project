@@ -317,7 +317,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5ef70179cfef2b478b8c3c9c97142f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  below: {fileID: 0}
 --- !u!61 &133031681
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -424,11 +423,11 @@ Transform:
   m_GameObject: {fileID: 1302654078}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 9.808934}
-  m_LocalScale: {x: 0.1, y: 0.01, z: 1}
+  m_LocalPosition: {x: 200, y: 410, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1426044952}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1316127106
 GameObject:
@@ -640,8 +639,7 @@ Transform:
   m_LocalPosition: {x: -736, y: -178, z: 0}
   m_LocalScale: {x: 10, y: 100, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1302654079}
+  m_Children: []
   m_Father: {fileID: 1398154737}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1426044953
@@ -659,7 +657,6 @@ MonoBehaviour:
   rotationSpeed: 100
   extentionSpeed: 1000
   isRotating: 0
-  CustomPivot: {fileID: 1302654079}
   PipeCollider: {fileID: 1316127106}
   PlayerCharacter: {fileID: 85493005}
 --- !u!212 &1426044954
@@ -964,6 +961,7 @@ MonoBehaviour:
   Character: {fileID: 85493005}
   Target: {fileID: 983740670}
   Player: {fileID: 1398154736}
+  Pivot: {fileID: 1302654078}
   Deadzone: -10
 --- !u!1001 &5267897659173123849
 PrefabInstance:
@@ -1040,3 +1038,4 @@ SceneRoots:
   - {fileID: 1866362058}
   - {fileID: 2052944774}
   - {fileID: 1316127107}
+  - {fileID: 1302654079}
