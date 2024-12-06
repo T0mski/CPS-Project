@@ -101,16 +101,11 @@ public class PoleScript : MonoBehaviour
 
         NextLength.y += 0f;
         NextColliderVert.x += 400f;
-        //NextColliderVert.y = 100f;
         NextVert.x += 400f;
-       // NextVert.y = 50f;
 
         NewLength.y = 0f;
         NewVert.x += 400f;
         NewColliderVert.x += 400f;
-      // NewColliderVert.y = 100f;
-
-
     }
 
 
