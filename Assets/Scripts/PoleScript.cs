@@ -8,6 +8,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class PoleScript : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class PoleScript : MonoBehaviour
     private Vector3 CurenrtPos;
     private Vector3 NewColliderVert;
     private Vector3 NextColliderVert;
-    public Transform CustomPivot { get; set; }
+    public UnityEngine.Transform CustomPivot { get; set; }
     
 
     public GameObject PipeCollider;
@@ -55,7 +56,7 @@ public class PoleScript : MonoBehaviour
         PoleExtention();
         // Checks collisons 
         CollisionChecker();
-        Vector3 vector3 = new Vector3(10f, 100f, 0f);
+        Vector3 vector3 = new(10f, 100f, 0f);
         if (gameObject.transform.localScale != vector3)
         {
             Debug.Log(gameObject.transform.localScale);
@@ -98,6 +99,7 @@ public class PoleScript : MonoBehaviour
 
         isSpacePressed = false;
         CustomPivot = GameObject.Find("Pivot").transform;
+        new Vector3(10f, 100f, 0f);
 
         NextLength.y += 0f;
         NextColliderVert.x += 400f;
@@ -106,8 +108,8 @@ public class PoleScript : MonoBehaviour
         NewLength.y = 0f;
         NewVert.x += 400f;
         NewColliderVert.x += 400f;
-    }
 
+    }
 
     private void Polefalling()
     {
@@ -147,7 +149,6 @@ public class PoleScript : MonoBehaviour
             transform.position = NewVert;
             PipeCollider.transform.position = NewColliderVert;
 
-          
         }
     }
 
