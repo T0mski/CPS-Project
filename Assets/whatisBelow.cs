@@ -11,14 +11,12 @@ public class whatisBelow : MonoBehaviour
         if (collision.CompareTag("NextBuilding"))
         {
             other = collision.transform.parent.gameObject;
-            Debug.Log("other = " + collision.gameObject);
-           Debug.Log("It is colliding with something so the code should work");
+
 
         }
-
         else
         {
-            Debug.Log("Something Else");
+
         }
     }
 }

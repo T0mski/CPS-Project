@@ -18,12 +18,10 @@ public class ButtonScript : MonoBehaviour
 
 
     // Is Listening for any input form buttons on any menu then the variable that is input is called using the load scene button.
- 
-
-
     public void EnableScene()
     {
         SceneManager.LoadScene(SceneToLoad);
+        PlayerPrefs.SetInt("Score", 0);
     }
 
 }

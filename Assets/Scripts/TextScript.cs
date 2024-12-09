@@ -12,6 +12,7 @@ public class TextScript : MonoBehaviour
     void Start()
     {
         Score = PlayerPrefs.GetInt("Score");
+        
     }
     // Update is called once per frame
     void Update()

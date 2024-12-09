@@ -57,10 +57,7 @@ public class PoleScript : MonoBehaviour
         // Checks collisons 
         CollisionChecker();
         Vector3 vector3 = new(10f, 100f, 0f);
-        if (gameObject.transform.localScale != vector3)
-        {
-            Debug.Log(gameObject.transform.localScale);
-        }
+        
         
 
         if (GameObject.Find("PoleCollider").GetComponent<PoleCollisionScript>().CollisionType == "NextBuilding" && !HasReset)

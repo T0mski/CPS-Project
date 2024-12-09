@@ -28,11 +28,12 @@ public class MainGameScript : MonoBehaviour
 
     public float Deadzone = -10f;
     public int Score = 0;
+    private bool DoOnce;
 
 
     private void Start()
     {
-        PlayerPrefs.SetInt("Score", 0 );
+        //PlayerPrefs.SetInt("Score", 0 );
     }
     void SpawnBuilding()
     {
@@ -65,7 +66,7 @@ public class MainGameScript : MonoBehaviour
     
 
 
-    private void Update()
+    void Update()
     {
         if (Character.transform.position.x == Tower.transform.position.x && DoneOnce)
         {
@@ -74,10 +75,13 @@ public class MainGameScript : MonoBehaviour
             OnBecameInvisible();
             DoneOnce = false;
             SceneManager.LoadScene("MainGame");
-            Score += 1;
-            PlayerPrefs.SetInt("Score", Score);
-            //GameObject.Find("Pole").GetComponent<PoleScript>().Restart();
+            DoOnce = false;
+            AddScore(DoOnce);
+            
+            
         }
+
+        
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -86,6 +90,18 @@ public class MainGameScript : MonoBehaviour
         }
         
     }
+
+    private void AddScore(bool DoOnce)
+    {
+        if (!DoOnce)
+        {
+            Score++;
+            DoOnce = true;
+            PlayerPrefs.SetInt("Score", Score);
+        }
+    }
+
+    
     void OnBecameInvisible()
 
     {
