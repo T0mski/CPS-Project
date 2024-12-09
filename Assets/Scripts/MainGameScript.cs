@@ -6,6 +6,7 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEditor.PackageManager.Requests;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
@@ -26,9 +27,13 @@ public class MainGameScript : MonoBehaviour
     private bool DoneOnce = true;
 
     public float Deadzone = -10f;
+    public int Score = 0;
 
-   
 
+    private void Start()
+    {
+        PlayerPrefs.SetInt("Score", 0 );
+    }
     void SpawnBuilding()
     {
         RandomNum = Random.Range(0, nextMult.Length);
@@ -68,7 +73,10 @@ public class MainGameScript : MonoBehaviour
             SpawnBuilding();
             OnBecameInvisible();
             DoneOnce = false;
-            GameObject.Find("Pole").GetComponent<PoleScript>().Restart();
+            SceneManager.LoadScene("MainGame");
+            Score += 1;
+            PlayerPrefs.SetInt("Score", Score);
+            //GameObject.Find("Pole").GetComponent<PoleScript>().Restart();
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
