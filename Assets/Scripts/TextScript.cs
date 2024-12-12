@@ -7,21 +7,16 @@ public class TextScript : MonoBehaviour
 {
     private int Score;
     public TMP_Text score;
+    [SerializeField]
+    private IntSO scoreSO;
 
-    // Start is called before the first frame update
-    void Start()
+   private void Update()
     {
-        Score = PlayerPrefs.GetInt("Score");
+
+        score.text = scoreSO.Value.ToString();
         
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        if (Score > 0)
-        {
-            score.text = Score.ToString();
-            Debug.Log(Score);
-        }
+        
+        
 
     }
 }

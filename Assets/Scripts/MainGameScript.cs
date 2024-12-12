@@ -24,17 +24,15 @@ public class MainGameScript : MonoBehaviour
 
     private GameObject CurrentBuilding;
 
-    private bool DoneOnce = true;
+    private bool DoneOnce = false;
+    private bool DoOnce = false;
 
     public float Deadzone = -10f;
-    public int Score = 0;
-    private bool DoOnce;
+    
 
-
-    private void Start()
-    {
-        //PlayerPrefs.SetInt("Score", 0 );
-    }
+    [SerializeField]
+    private IntSO scoreSO;
+    
     void SpawnBuilding()
     {
         RandomNum = Random.Range(0, nextMult.Length);
@@ -64,22 +62,27 @@ public class MainGameScript : MonoBehaviour
         MainCamera.transform.position = new Vector3(MainCameraX, MainCamera.transform.position.y, MainCamera.transform.position.z);
     }
     
-
+    void Restart()
+    {
+        DoneOnce = false;
+        DoOnce = false;
+    }
 
     void Update()
     {
-        if (Character.transform.position.x == Tower.transform.position.x && DoneOnce)
+        if (Character.transform.position.x == Tower.transform.position.x && !DoneOnce)
         {
+            /*
             MoveAll();
             SpawnBuilding();
             OnBecameInvisible();
-            DoneOnce = false;
+            */
+            DoneOnce = true;
             SceneManager.LoadScene("MainGame");
-            DoOnce = false;
-            AddScore(DoOnce);
-            
+            AddScore();
             
         }
+        Debug.Log(scoreSO.Value);
 
         
 
@@ -91,13 +94,12 @@ public class MainGameScript : MonoBehaviour
         
     }
 
-    private void AddScore(bool DoOnce)
+    private void AddScore()
     {
         if (!DoOnce)
         {
-            Score++;
+            scoreSO.Value += 1;
             DoOnce = true;
-            PlayerPrefs.SetInt("Score", Score);
         }
     }
 

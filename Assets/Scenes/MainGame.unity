@@ -875,6 +875,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: {fileID: 1517451892}
+  scoreSO: {fileID: 11400000, guid: 6e0389dd2654cc34aa29dab44c757ea8, type: 2}
 --- !u!114 &1517451892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1211,7 +1212,7 @@ MonoBehaviour:
   Player: {fileID: 1398154736}
   Pivot: {fileID: 1302654078}
   Deadzone: -10
-  Score: 0
+  scoreSO: {fileID: 11400000, guid: 6e0389dd2654cc34aa29dab44c757ea8, type: 2}
 --- !u!1 &2140060711
 GameObject:
   m_ObjectHideFlags: 0
