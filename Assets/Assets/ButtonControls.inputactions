@@ -28,6 +28,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "OptionsButton",
+            "id": "de9be1a5-7aa9-48b7-909d-f1cb7eeef54f",
+            "actions": [
+                {
+                    "name": "Options",
+                    "type": "Button",
+                    "id": "f6f79967-0e13-4c97-a3cd-b084ef0c78c1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "6b4f6c44-2357-48cd-92a6-1285a481d323",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Options",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

@@ -71,21 +71,13 @@ public class MainGameScript : MonoBehaviour
     void Update()
     {
         if (Character.transform.position.x == Tower.transform.position.x && !DoneOnce)
-        {
-            /*
-            MoveAll();
-            SpawnBuilding();
-            OnBecameInvisible();
-            */
+        { 
+
             DoneOnce = true;
             SceneManager.LoadScene("MainGame");
             AddScore();
-            
         }
-        Debug.Log(scoreSO.Value);
-
         
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
             CurrentBuilding = GameObject.Find("What is below.").GetComponent<whatisBelow>().other;
@@ -101,13 +93,6 @@ public class MainGameScript : MonoBehaviour
             scoreSO.Value += 1;
             DoOnce = true;
         }
-    }
-
-    
-    void OnBecameInvisible()
-
-    {
-        Destroy(GameObject.Find("PreviousBuilding"));
     }
 }
 

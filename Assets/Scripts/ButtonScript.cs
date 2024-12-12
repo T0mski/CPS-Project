@@ -21,7 +21,7 @@ public class ButtonScript : MonoBehaviour
     public void EnableScene()
     {
         SceneManager.LoadScene(SceneToLoad);
-        PlayerPrefs.SetInt("Score", 0);
+        
     }
 
 }
