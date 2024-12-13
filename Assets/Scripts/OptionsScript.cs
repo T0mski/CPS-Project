@@ -41,7 +41,23 @@ public class OptionsScript : MonoBehaviour
         // Debug or send the selected topics to the quiz manager
         Debug.Log("Selected Topics: " + string.Join(", ", selectedTopics));
         // Pass `selectedTopics` to your game manager or use as needed
+
+        foreach(var topic in selectedTopics)
+        {
+            if (topicQuestions.TryGetValue(topic, out List<(string Questions, string[] Options)> questions)){
+                foreach(var (question, options) in questions)
+                {
+                    Debug.Log(question);
+                    foreach( var option in options)
+                    {
+                        Debug.Log(option);
+                    }
+                }
+            }
+        }
     }
+
+
 
 
     Dictionary<string, List<(string Question, string[] Options)>> topicQuestions = new Dictionary<string, List<(string, string[])>>()
