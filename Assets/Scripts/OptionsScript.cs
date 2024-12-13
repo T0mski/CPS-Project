@@ -18,7 +18,10 @@ public class OptionsScript : MonoBehaviour
     public Button confirmButton;  // Reference to the confirm button
 
     private List<string> selectedTopics = new List<string>(); // Holds the selected topics
+    private List<string> TopicQs = new List<string>();
 
+    [SerializeField]
+    private ArraySO QuestionsAarray;
     void Start()
     {
         // Set up confirm button listener
@@ -47,12 +50,10 @@ public class OptionsScript : MonoBehaviour
             if (topicQuestions.TryGetValue(topic, out List<(string Questions, string[] Options)> questions)){
                 foreach(var (question, options) in questions)
                 {
-                    Debug.Log(question);
-                    foreach( var option in options)
-                    {
-                        Debug.Log(option);
-                    }
+                    TopicQs.Add(question);
+                    
                 }
+
             }
         }
     }

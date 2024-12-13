@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+
 
 public class QuizManager : MonoBehaviour
 {
@@ -9,20 +11,23 @@ public class QuizManager : MonoBehaviour
     {
         public string questionText;          // The question text
         public string[] options;            // Array of answer options
-        public int correctOptionIndex;      // Index of the correct option
+        public int correctOptionIndex;     // Index of the correct option
     }
 
-    public Text questionText;               // UI Text for the question
+    public TMP_Text questionText;            // UI Text for the question
     public Button[] answerButtons;          // Array of Buttons for the answers
-    public Text feedbackText;               // Feedback text (e.g., "Correct!" or "Try Again")
+    public TMP_Text feedbackText;          // Feedback text (e.g., "Correct!" or "Try Again")
 
-    public List<Question> questions = new List<Question>(); // List of questions
-    private int currentQuestionIndex = 0;  // Current question index
+    public List<Question> questions = new List<Question>();     // List of questions
+    private int currentQuestionIndex = 0;                      // Current question index
 
+
+    [SerializeField]
+    private ArraySO QuestionsArray;
     private void Start()
     {
         feedbackText.text = "";             // Clear feedback text initially
-        DisplayQuestion();                  // Display the first question
+        DisplayQuestion();                 // Display the first question
     }
 
     public void DisplayQuestion()
@@ -84,4 +89,6 @@ public class QuizManager : MonoBehaviour
             button.gameObject.SetActive(false); // Hide the buttons
         }
     }
+
+    
 }
