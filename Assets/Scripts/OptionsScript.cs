@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,13 @@ public class OptionsScript : MonoBehaviour
         public string topicName;  // Display name of the topic
         public Toggle toggle;     // Reference to the toggle UI element
     }
+    public class QuestionAndOptions 
+    {
+        public string Questions;
+        public List<string> Options = new List<string>();
+        //public int correctIndex;
+    }
+
 
     public List<Topic> topics;  // List of topics and toggles
 
@@ -19,9 +27,10 @@ public class OptionsScript : MonoBehaviour
 
     private List<string> selectedTopics = new List<string>(); // Holds the selected topics
     private List<string> TopicQs = new List<string>();
+    private List<string> TopicOs = new List<string>();
 
     [SerializeField]
-    private ArraySO QuestionsAarray;
+    private ArraySO QuestionsArray;
     void Start()
     {
         // Set up confirm button listener
@@ -42,26 +51,28 @@ public class OptionsScript : MonoBehaviour
         }
 
         // Debug or send the selected topics to the quiz manager
-        Debug.Log("Selected Topics: " + string.Join(", ", selectedTopics));
+        UnityEngine.Debug.Log("Selected Topics: " + string.Join(", ", selectedTopics));
         // Pass `selectedTopics` to your game manager or use as needed
 
         foreach(var topic in selectedTopics)
         {
             if (topicQuestions.TryGetValue(topic, out List<(string Questions, string[] Options)> questions)){
-                foreach(var (question, options) in questions)
+                foreach (var (question,option) in questions)
                 {
                     TopicQs.Add(question);
-                    
-                }
-
-            }
+                    foreach (var Option in questions)
+                    {
+                       
+                    }
+                }      
+            }    
         }
     }
 
 
 
 
-    Dictionary<string, List<(string Question, string[] Options)>> topicQuestions = new Dictionary<string, List<(string, string[])>>()
+Dictionary<string, List<(string Question, string[] Options)>> topicQuestions = new Dictionary<string, List<(string, string[])>>()
 {
     { "Structure of CPU", new List<(string, string[])>
         {
