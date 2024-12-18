@@ -22,7 +22,7 @@ public class ButtonScript : MonoBehaviour
         
     }
     // Allows the player to quit the game.
-    public void Quit()
+    public void QuitGame()
     {
         Application.Quit();
     }

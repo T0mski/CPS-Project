@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class OptionsScript : MonoBehaviour
@@ -28,6 +30,8 @@ public class OptionsScript : MonoBehaviour
     private List<string> selectedTopics = new List<string>(); // Holds the selected topics
     private List<string> TopicQs = new List<string>();
     private List<string> TopicOs = new List<string>();
+
+    public string[] Testing = new string[11];
 
     [SerializeField]
     private ArraySO QuestionsArray;
@@ -57,20 +61,15 @@ public class OptionsScript : MonoBehaviour
         foreach(var topic in selectedTopics)
         {
             if (topicQuestions.TryGetValue(topic, out List<(string Questions, string[] Options)> questions)){
-                foreach (var (question,option) in questions)
+                foreach (var (question, option) in questions)
                 {
                     TopicQs.Add(question);
-                    foreach (var Option in questions)
-                    {
-                       
-                    }
-                }      
+                }
             }    
         }
     }
 
-
-
+    
 
 Dictionary<string, List<(string Question, string[] Options)>> topicQuestions = new Dictionary<string, List<(string, string[])>>()
 {

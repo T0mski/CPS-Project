@@ -126,20 +126,22 @@ public class PoleScript : MonoBehaviour
 
     private void PoleExtention()
     {
+        //Checks if the Space key is pressed.
         if (Input.GetKeyDown(KeyCode.Space))
         {
             isExtending = true;
         }
+        // if space has not been pressed before and the pole is allowed to extend then the code below is executed.
         if (!isSpacePressed && isExtending)
         {
             
-            NextLength.y += 100f * Time.deltaTime;
-            NextColliderVert.y += 100f * Time.deltaTime;
-            NextVert.y += (100f / 2) * Time.deltaTime;
+            NextLength.y += 100f * Time.deltaTime; //Multipys the time between frames by 100 and adds that to the current value of the NextLengths Y value.
+            NextColliderVert.y += 100f * Time.deltaTime; // Multipys the time between frames by 100 and adds that to the current value of the Colliders next Y value
+            NextVert.y += (100f / 2) * Time.deltaTime;// Multplys the time between frames by half of the standard and adds that to the new vertical height of the pole.
 
-            NewLength = new Vector3(10f, 100f) + NextLength;
-            NewVert = new Vector3(200f, 465f) + NextVert;
-            NewColliderVert = new Vector3(200f, 515f) + NextColliderVert;
+            NewLength = new Vector3(10f, 100f) + NextLength; // Adds the next length to the current .
+            NewVert = new Vector3(200f, 465f) + NextVert; // adds the next vert to the current vertical.
+            NewColliderVert = new Vector3(200f, 515f) + NextColliderVert; // adds the next collider vert to the current collider vert.
 
             // Changes the scale and position of the pole so it moves vertically only.
             transform.localScale = NewLength;
@@ -148,7 +150,7 @@ public class PoleScript : MonoBehaviour
 
         }
     }
-
+    //this allows me to send the pole back to its origional position.
     public void ResetPole()
     {
         transform.localScale = Scale;
@@ -162,7 +164,7 @@ public class PoleScript : MonoBehaviour
 
         
     }
-
+    // this allows me to reset the pols position in relation to the players current pos.
     public void ResetPoleToPlayer()
     {
         transform.localScale = Scale;
@@ -177,7 +179,7 @@ public class PoleScript : MonoBehaviour
 
 
     }
-
+    //Checks collisions.
     void CollisionChecker()
     {
         if (PipeCollider.GetComponent<PoleCollisionScript>().CollisionCheck == true)
@@ -187,7 +189,7 @@ public class PoleScript : MonoBehaviour
             OnBuilding();
         }
     }
-
+    //checks if the pole has landed flat on a building.
     void OnBuilding()
     {
         if (gameObject.transform.rotation.z < -0.70f && gameObject.transform.rotation.z > -0.75f)
