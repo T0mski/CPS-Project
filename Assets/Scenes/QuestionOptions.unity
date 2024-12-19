@@ -1349,6 +1349,18 @@ MonoBehaviour:
   - topicName: Boolean Algebra
     toggle: {fileID: 1869295868}
   confirmButton: {fileID: 699915527}
+  selectedTopics:
+  - Structure of CPU
+  - Types Of Processor
+  - Types Of Storage
+  - Types of Language
+  - Compression
+  - Encryption/Hashing
+  - Databases
+  - Networks
+  - Web Technologies
+  - Data Types and Structs
+  - Boolean Algebra
 --- !u!1 &664186654
 GameObject:
   m_ObjectHideFlags: 0
@@ -1675,13 +1687,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 604809637}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 604809641}
+        m_TargetAssemblyTypeName: OptionsScript, Assembly-CSharp
+        m_MethodName: OnConfirmSelection
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

@@ -539,15 +539,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be9f9e2b40f1ba94583529acaa57560b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questionText: {fileID: 2134958170}
+  outQuestionText: {fileID: 2134958170}
   answerButtons:
   - {fileID: 1100829394}
   - {fileID: 482344661}
   - {fileID: 12291014}
   - {fileID: 135215662}
   feedbackText: {fileID: 156704896}
-  questions: []
-  QuestionsArray: {fileID: 11400000, guid: 330b115dfe51bbb4487d826da455fa11, type: 2}
+  questions:
+    questionText: 
+    options: []
+    correctOptionIndex: 0
+  optionsScript: {fileID: 803536004}
 --- !u!114 &135171195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1164,6 +1167,64 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 497295115}
   m_CullTransparentMesh: 1
+--- !u!1 &803536003
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 803536005}
+  - component: {fileID: 803536004}
+  m_Layer: 0
+  m_Name: Options
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &803536004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803536003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 911067edc0c2fc54f9307166773e05ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topics: []
+  confirmButton: {fileID: 0}
+  selectedTopics:
+  - Structure of CPU
+  - Types Of Processor
+  - Types Of Storage
+  - Types of Language
+  - Compression
+  - Encryption/Hashing
+  - Databases
+  - Networks
+  - Web Technologies
+  - Data Types and Structs
+  - Boolean Algebra
+--- !u!4 &803536005
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803536003}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 968.24915, y: 682.43567, z: 3.034773}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &824790764 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2194286675433816482, guid: 3643982eb9e523549b403cc673420df4, type: 3}
@@ -1556,7 +1617,7 @@ Transform:
   m_GameObject: {fileID: 1419284983}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 965.6633, y: 596.8448, z: -5.7380266}
+  m_LocalPosition: {x: 965, y: 600, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2469,6 +2530,7 @@ MonoBehaviour:
   Player: {fileID: 1398154736}
   Pivot: {fileID: 1302654078}
   Deadzone: -10
+  QuizManager: {fileID: 1419284983}
   scoreSO: {fileID: 11400000, guid: 6e0389dd2654cc34aa29dab44c757ea8, type: 2}
 --- !u!1 &2065645751
 GameObject:
@@ -2919,3 +2981,4 @@ SceneRoots:
   - {fileID: 1995027557}
   - {fileID: 354305066}
   - {fileID: 1419284984}
+  - {fileID: 803536005}

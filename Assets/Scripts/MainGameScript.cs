@@ -28,6 +28,7 @@ public class MainGameScript : MonoBehaviour
     private bool DoOnce = false;
 
     public float Deadzone = -10f;
+    public GameObject QuizManager;
     
 
     [SerializeField]
@@ -83,7 +84,6 @@ public class MainGameScript : MonoBehaviour
             CurrentBuilding = GameObject.Find("What is below.").GetComponent<whatisBelow>().other;
             CurrentBuilding.name = "PreviousBuilding";
         }
-        
     }
 
     private void AddScore()
@@ -93,6 +93,12 @@ public class MainGameScript : MonoBehaviour
             scoreSO.Value += 1;
             DoOnce = true;
         }
+    }
+
+
+    private void Start()
+    {
+      //  QuizManager.SetActive(false);
     }
 }
 
