@@ -4,7 +4,8 @@ using UnityEngine.UI;
 using TMPro;
 using static OptionsScript;
 using UnityEngine.Rendering;
-using System;
+using UnityEngine.SceneManagement;
+using static UnityEditor.ShaderData;
 
 
 
@@ -26,7 +27,7 @@ public class QuizManager : MonoBehaviour
         }
     }
 
-    public TMP_Text outQuestionText;            // UI Text for the question
+    public TMP_Text outQuestionText;          // UI Text for the question
     public Button[] answerButtons;          // Array of Buttons for the answers
     public TMP_Text feedbackText;          // Feedback text (e.g., "Correct!" or "Try Again")
 
@@ -46,7 +47,14 @@ public class QuizManager : MonoBehaviour
         Topics = optionsScript.selectedTopics;
         DisplayQuestion();                 // Display the first question
     }
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene("MainGame");
+        }
 
+    }
     public void DisplayQuestion()
     {
         
@@ -55,24 +63,25 @@ public class QuizManager : MonoBehaviour
 
     public string GetRandomQuestionFromDict(List<string> values, Dictionary<string, List<(string, string[])>> QuestionDict)
     {
-        System.Random random = new System.Random();
-        foreach(string value in values)
+        List<string> posQs = new List<string>();
+        foreach (string value in values)
         {
             if (QuestionDict.TryGetValue(value, out List<(string, string[])> questionsArray))
             {
-                foreach( var question in questionsArray)
+                
+                foreach ( var question in questionsArray)
                 {
-                    List<string> posQs = new List<string>();
-                    posQs.Add(question.Item1);
-                    if( posQs.Count > 0 )
-                    {
-                        int randomIndex = random.Next(0, Math.Min(4, posQs.Count));
-                        return posQs[randomIndex];
-                    }
 
-                    
+                    posQs.Add(question.Item1);
+         
                 }
             }
+        }
+        if (posQs.Count > 0)
+        {
+            int randomIndex = Random.Range(0, posQs.Count);
+            Debug.Log(randomIndex);
+            return posQs[randomIndex];
         }
 
         return "No Matching question found.";
