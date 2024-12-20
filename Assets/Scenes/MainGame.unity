@@ -2495,8 +2495,12 @@ PrefabInstance:
       value: NextBuilding
       objectReference: {fileID: 0}
     - target: {fileID: 3822758051523156083, guid: 3643982eb9e523549b403cc673420df4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3822758051523156083, guid: 3643982eb9e523549b403cc673420df4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.45
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

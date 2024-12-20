@@ -18,7 +18,7 @@ public class CharacterScript : MonoBehaviour
     private Vector3 ThisObject; // A variable of the 3D Vector of this game objects location.
     private bool HasFallenDown = false;
     public bool IsMoving;
-    public bool AllowedToFall;
+    public bool AllowedToFall = true;
 
     // This function is called at the start of the game and only at the start of the game. 
     private void Start()
@@ -125,6 +125,7 @@ public class CharacterScript : MonoBehaviour
         if (transform.position.y < 450f && GameObject.Find("PoleCollider").GetComponent<PoleCollisionScript>().CollisionType == "Building")
         {
             HasFallenDown = true;
+            
         }
         
     }

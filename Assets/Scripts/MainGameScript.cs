@@ -83,6 +83,7 @@ public class MainGameScript : MonoBehaviour
         {
             CurrentBuilding = GameObject.Find("What is below.").GetComponent<whatisBelow>().other;
             CurrentBuilding.name = "PreviousBuilding";
+            CurrentBuilding.tag = "Building";
         }
     }
 

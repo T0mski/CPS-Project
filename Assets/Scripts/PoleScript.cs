@@ -33,6 +33,7 @@ public class PoleScript : MonoBehaviour
 
     public GameObject PipeCollider;
     public GameObject PlayerCharacter;
+    
 
     private Vector3 Scale;
     private Quaternion Rotation;
@@ -130,6 +131,7 @@ public class PoleScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             isExtending = true;
+            
         }
         // if space has not been pressed before and the pole is allowed to extend then the code below is executed.
         if (!isSpacePressed && isExtending)
@@ -193,7 +195,7 @@ public class PoleScript : MonoBehaviour
     void OnBuilding()
     {
         if (gameObject.transform.rotation.z < -0.70f && gameObject.transform.rotation.z > -0.75f)
-        { 
+        {
             PlayerCharacter.GetComponent<CharacterScript>().IsMoving = true;
 
         }
@@ -201,7 +203,6 @@ public class PoleScript : MonoBehaviour
         else
         {
             PlayerCharacter.GetComponent<CharacterScript>().IsMoving = true;
-            GameObject.Find("QuizManager").SetActive(true);
         }
     }
 }
