@@ -39,9 +39,9 @@ public class QuizManager : MonoBehaviour
     private void Start()
     {
         
-        feedbackText.text = "";             // Clear feedback text initially
-        Topics = optionsScript.selectedTopics;
-        DisplayQuestion();                 // Display the first question
+        feedbackText.text = "";                 // Clear feedback text initially
+        Topics = optionsScript.selectedTopics;  // sets topic list equal to the 
+        DisplayQuestion();                      // Display the first question
     }
     //Called Every Game frame.
     private void Update()
@@ -62,19 +62,21 @@ public class QuizManager : MonoBehaviour
     }
     public string GetRandomQuestionFromDict(List<string> values, Dictionary<string, List<(string, string[])>> QuestionDict)
     {
-        
-        
-        
+        // loops through the Topics in the values list.
         foreach (string value in values)
         {
+            // checks if the value is in the dictionary.
             if (QuestionDict.TryGetValue(value, out List<(string, string[])> questionsArray))
             {
+                // loops through the questions in the questions array.
                 foreach ( var question in questionsArray)
                 { 
+                    // adds the first item in the questions tuple to the possible questions list.
                     posQs.Add(question.Item1);
+                    // loops through the options in the second item of the questions tuple.
                     foreach(var option in question.Item2)
                     {
-                        
+                        // adds the option to the possible options list.
                         posOs.Add(option);
                         
                     }
@@ -82,7 +84,10 @@ public class QuizManager : MonoBehaviour
                 }
             }
         }
+        // gets random number between 0 and the number of items in the posQs list.
         randomIndex = Random.Range(0, posQs.Count);
+        //if the posqs list is longer than 0 it returns the item at the random index in the posQs list
+        //else it returns "no Matching Question" which shouldnt be possible.
         if (posQs.Count > 0)
         {
             return posQs[randomIndex];
