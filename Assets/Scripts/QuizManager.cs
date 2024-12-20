@@ -75,7 +75,6 @@ public class QuizManager : MonoBehaviour
         SetButtonTextToOptions();
 
     }
-
     public string GetRandomQuestionFromDict(List<string> values, Dictionary<string, List<(string, string[])>> QuestionDict)
     {
         
@@ -105,7 +104,6 @@ public class QuizManager : MonoBehaviour
         }
         return "No Matching question found.";
     }
-
     public void SetButtonTextToOptions()
     {
         int randButton = Random.Range(0, 4);
@@ -144,9 +142,6 @@ public class QuizManager : MonoBehaviour
 
         }
     }
-
-
-   
     public void CheckAnswer(int selectedOptionIndex)
     {
         // Check if the selected option is correct
@@ -199,7 +194,6 @@ public class QuizManager : MonoBehaviour
         SceneManager.LoadScene("Fail");
         
     }
-
     private void DecrementScore()
     {
         if (!DoOnce)
@@ -237,6 +231,61 @@ public class QuizManager : MonoBehaviour
                 new string[] { "To handle graphics-related calculations", "To store video memory", "To manage display resolutions", "To connect the CPU to a monitor" })
         }
     },
+    {
+                "Types Of Storage", new List<(string, string[])>
+                {
+                    ("What is the purpose of primary storage?", new string[] {"To store data and instructions currently in use", "To archive data", "To backup data", "To transmit data"}),
+                    ("Which type of storage is non-volatile and stores the operating system?", new string[] {"ROM", "RAM", "Cache", "Virtual Memory"}),
+                    ("Which storage medium uses magnetic disks to store data?", new string[] {"Hard Disk Drive", "Solid State Drive", "Optical Disc", "Flash Memory"}),
+                    ("What is an advantage of solid-state storage over magnetic storage?", new string[] {"Faster data access", "Lower cost per GB", "Larger capacity", "Longer lifespan"})
+                }
+            },
+            {
+                "Types of Languages", new List<(string, string[])>
+                {
+                    ("What is a characteristic of a high-level language?", new string[] {"It is machine-independent", "It is hardware-specific", "It uses binary instructions", "It is written in assembly"}),
+                    ("Which language type is used to write low-level hardware instructions?", new string[] {"Assembly Language", "Python", "JavaScript", "SQL"}),
+                    ("What is the main purpose of an assembler?", new string[] {"To convert assembly code into machine code", "To interpret high-level code", "To compile Java programs", "To debug errors"}),
+                    ("Which language is best suited for web development?", new string[] {"HTML and CSS", "Assembly", "C", "SQL"})
+                }
+            },
+            {
+                "Compression", new List<(string, string[])>
+                {
+                    ("What is the purpose of lossy compression?", new string[] {"To reduce file size by removing non-essential data", "To encrypt the file", "To backup data", "To improve file integrity"}),
+                    ("Which is an example of a lossless compression format?", new string[] {"ZIP", "JPEG", "MP3", "MP4"}),
+                    ("What is a trade-off when using lossy compression?", new string[] {"Loss of quality", "Increased file size", "Reduced compatibility", "Slower processing"}),
+                    ("Which algorithm is commonly used in lossless compression?", new string[] {"Huffman Coding", "JPEG Compression", "MP3 Encoding", "AES Encryption"})
+                }
+            },
+            {
+                "Encryption/Hashing", new List<(string, string[])>
+                {
+                    ("What is the purpose of hashing in computer systems?", new string[] {"To create a fixed-size unique representation of data", "To encrypt data for transmission", "To compress data for storage", "To backup sensitive information"}),
+                    ("Which encryption method uses a pair of public and private keys?", new string[] {"Asymmetric Encryption", "Symmetric Encryption", "Hashing", "Steganography"}),
+                    ("What is a characteristic of a good hashing algorithm?", new string[] {"It produces unique and fixed-size hashes", "It is reversible", "It requires a secret key", "It is hardware-dependent"}),
+                    ("Which encryption algorithm is widely used for securing online communications?", new string[] {"AES", "SHA-256", "MD5", "Huffman Encoding"})
+                }
+            },
+            {
+                "Databases", new List<(string, string[])>
+                {
+                    ("What is a primary key in a relational database?", new string[] {"A unique identifier for a record", "A field used for sorting", "An encryption key", "A backup key"}),
+                    ("Which command is used to retrieve data from a database?", new string[] {"SELECT", "INSERT", "DELETE", "UPDATE"}),
+                    ("What is the purpose of normalization in database design?", new string[] {"To reduce redundancy and improve data integrity", "To increase data size", "To create unstructured data", "To encrypt sensitive information"}),
+                    ("Which type of database stores data in key-value pairs?", new string[] {"NoSQL", "Relational", "Hierarchical", "Graph"})
+                }
+            },
+            {
+                "Networks", new List<(string, string[])>
+                {
+                    ("What is the purpose of a network protocol?", new string[] {"To define rules for data communication", "To encrypt network data", "To compress transmitted files", "To store user credentials"}),
+                    ("Which network topology connects all devices to a central hub?", new string[] {"Star Topology", "Bus Topology", "Mesh Topology", "Ring Topology"}),
+                    ("What does the IP in IP address stand for?", new string[] {"Internet Protocol", "Internal Process", "Interconnected Path", "Information Packet"}),
+                    ("Which layer of the OSI model handles data encryption?", new string[] {"Presentation Layer", "Transport Layer", "Network Layer", "Application Layer"})
+                }
+            },
+        
     { "Web Technologies", new List<(string, string[])>
         {
             ("What is the difference between HTML and CSS?",
