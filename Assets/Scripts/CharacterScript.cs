@@ -57,8 +57,8 @@ public class CharacterScript : MonoBehaviour
             float targetposX = targetpos.x;
             float currentposX = transform.position.x;
             float currentposY = transform.position.y;
-            /*transform.position = Vector3.MoveTowards(transform.position, targetpos, step); The unity MoveTowards Command Didnt allow me to do what i wanted so i crated the 
-            MoveTo command to only move the X value*/
+            /*transform.position = Vector3.MoveTowards(transform.position, targetpos, step); The unity MoveTowards 
+             * Command Didnt allow me to do what i wanted so i crated the MoveTo command to only move the X value*/
             float nextX = MoveTo(currentposX, targetposX, step);
             if (!HasFallenDown)
             {

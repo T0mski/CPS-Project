@@ -85,7 +85,10 @@ public class MainGameScript : MonoBehaviour
             CurrentBuilding.name = "PreviousBuilding";
             CurrentBuilding.tag = "Building";
         }
-        if(scoreSO.Value == 0 &&)
+        if (scoreSO.Value == 0)
+        {
+        
+        }
 
     }
 
