@@ -37,6 +37,8 @@ public class MainGameScript : MonoBehaviour
 
     void Update()
     {
+        // once the player has made it to the next building it will "Reload the game" (starts again)
+        // also adds score to the score card.
         if (Character.transform.position.x == Tower.transform.position.x && !DoneOnce)
         { 
 
@@ -44,13 +46,15 @@ public class MainGameScript : MonoBehaviour
             SceneManager.LoadScene("MainGame");
             AddScore();
         }
-        
+        // Sets different atributes of the object below the player .
         if (Input.GetKeyDown(KeyCode.Space))
         {
             CurrentBuilding = GameObject.Find("What is below.").GetComponent<whatisBelow>().other;
             CurrentBuilding.name = "PreviousBuilding";
             CurrentCollider.tag = "Building";
         }
+        // Check if the player has fallen down to show the QuizManager so the player
+        // can answer the question.
         if (scoreSO.Value >= 0 && characterScript.HasFallenDown)
         {
             QuizManager.SetActive(true); 

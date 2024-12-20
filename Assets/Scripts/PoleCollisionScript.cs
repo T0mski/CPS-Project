@@ -10,9 +10,10 @@ public class PoleCollisionScript : MonoBehaviour
     public bool CollisionCheck = false;
     public string CollisionType;
     public GameObject Character;
-   
+   // Called when a collider2D hits another Collider2D in the game tick (called once).
     private void OnTriggerEnter2D(Collider2D other)
     {
+        // Called when the collider lands on the correct building.
         if (other.gameObject.CompareTag("NextBuilding"))
         {
             CollisionCheck = true;
@@ -20,6 +21,7 @@ public class PoleCollisionScript : MonoBehaviour
             Debug.Log(CollisionType);
             Character.GetComponent<CharacterScript>().AllowedToFall = false;
         }
+        // Called when the collider lands on the correct building.
         else if (other.gameObject.CompareTag("Building"))
         {
             CollisionCheck = true;

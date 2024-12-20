@@ -29,12 +29,12 @@ public class PoleScript : MonoBehaviour
     private Vector3 NewColliderVert;
     private Vector3 NextColliderVert;
     public UnityEngine.Transform CustomPivot { get; set; }
-    
+
 
     public GameObject PipeCollider;
     public PoleCollisionScript poleCollisionScript;
     public GameObject PlayerCharacter;
-    
+
 
     private Vector3 Scale;
     private Quaternion Rotation;
@@ -45,28 +45,19 @@ public class PoleScript : MonoBehaviour
 
     private bool HasReset;
 
-    
+
 
     // Update fucntion called every game tick.
     private void Update()
     {
 
-        
+
         // calls the PoleFalling Functuion every game tick.
         Polefalling();
         // calls the PoleExtention Functuion every game tick.
         PoleExtention();
         // Checks collisons 
         CollisionChecker();
-   
-
-
-        if (GameObject.Find("PoleCollider").GetComponent<PoleCollisionScript>().CollisionType == "NextBuilding" && !HasReset)
-        {
-            transform.rotation = Quaternion.Euler(0f, 0f, 90f);
-            PipeCollider.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
-            HasReset = true;
-        }
 
     }
     private void Start()
@@ -103,12 +94,12 @@ public class PoleScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             isExtending = true;
-            
+
         }
         // if space has not been pressed before and the pole is allowed to extend then the code below is executed.
         if (!isSpacePressed && isExtending)
         {
-            
+
             NextLength.y += 100f * Time.deltaTime; //Multipys the time between frames by 100 and adds that to the current value of the NextLengths Y value.
             NextColliderVert.y += 100f * Time.deltaTime; // Multipys the time between frames by 100 and adds that to the current value of the Colliders next Y value
             NextVert.y += (100f / 2) * Time.deltaTime;// Multplys the time between frames by half of the standard and adds that to the new vertical height of the pole.
@@ -124,8 +115,6 @@ public class PoleScript : MonoBehaviour
 
         }
     }
-   
-    
     //Checks collisions.
     void CollisionChecker()
     {
@@ -133,17 +122,10 @@ public class PoleScript : MonoBehaviour
         {
             isRotating = false;
             // checks if the pole has landed on the next building correctly.
-            OnBuilding();
+            if (poleCollisionScript.CollisionType == "NextBuilding")
+            {
+                PlayerCharacter.GetComponent<CharacterScript>().IsMoving = true;
+            }
         }
-    }
-    //checks if the pole has landed flat on a building.
-    void OnBuilding()
-    {
-        if (/*gameObject.transform.rotation.z < -0.70f && gameObject.transform.rotation.z > -0.75f*/ poleCollisionScript.CollisionType == "NextBuilding" )
-        {
-            PlayerCharacter.GetComponent<CharacterScript>().IsMoving = true;
-        }
-
-        
     }
 }

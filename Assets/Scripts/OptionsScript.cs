@@ -22,7 +22,7 @@ public class OptionsScript : MonoBehaviour
 
     public Button confirmButton;  // Reference to the confirm button
 
-    public List<string> selectedTopics = new List<string>() 
+    public List<string> selectedTopics = new List<string>() // Holds the selected topics
     {   "Structure of CPU",
         "Types Of Processor", 
         "Types Of Storage", 
@@ -34,20 +34,13 @@ public class OptionsScript : MonoBehaviour
         "Web Technologies",
         "Data Types and Structs",
         "Boolean Algebra"
-    }; // Holds the selected topics
+    }; 
 
-    void Start()
-    {
-        foreach (var value in selectedTopics)
-        {
-            PlayerPrefs.SetString("Topics", value);
-        }
-    }
-
+ 
+    // Called on the click of the Continue button on the options page.
     public void OnConfirmSelection()
     {
         selectedTopics.Clear();
-
         // Check each toggle and add the topic to the selected list if it's enabled
         foreach (var topic in topics)
         {
@@ -56,19 +49,6 @@ public class OptionsScript : MonoBehaviour
                 selectedTopics.Add(topic.topicName);
             }
         }
-
-        // Debug or send the selected topics to the quiz manager
-        
-        
-        
-        // Pass `selectedTopics` to your game manager or use as 
         SceneManager.LoadScene("MainMenu");
     }
-
-    
-
 }
-
-
-
-

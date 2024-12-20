@@ -16,42 +16,25 @@ using UnityEditor.Experimental.GraphView;
 
 public class QuizManager : MonoBehaviour
 {
-    [System.Serializable]
-    public class Question
-    {
-        public string questionText;          // The question text
-        public string[] options;            // Array of answer options
-        public int correctOptionIndex;     // Index of the correct option
-
-        public Question(string text, string[] ops, int correctIndex)
-        {
-            questionText = text;
-            options = ops;
-            correctOptionIndex = correctIndex;
-
-        }
-    }
-
-    public TMP_Text outQuestionText;          // UI Text for the question
-    public Button[] answerButtons;          // Array of Buttons for the answers
-    public TMP_Text[] ButtonTxt;
-    public TMP_Text feedbackText;          // Feedback text (e.g., "Correct!" or "Try Again")
+    public TMP_Text outQuestionText;            // Reference to UI Text for the question.
+    public Button[] answerButtons;              // Reference to Array of Buttons for the answers.
+    public TMP_Text[] ButtonTxt;                // Reference to Array of the Text of the Buttons.
+    public TMP_Text feedbackText;               // Reference to Feedback text.
 
     public TMP_Text score;
-
-    public Question questions;     // List of questions
+  
     public OptionsScript optionsScript;
 
-    private List<string> Topics;
-    List<string> posQs = new List<string>();
-    List<string> posOs = new List<string>();
-    private int randomIndex;
-    private int correctIndex;
+    private List<string> Topics;                // This will hold the selected topics from the OptionsScript.
+    List<string> posQs = new List<string>();    // This is the possible questions that the player could be asked
+    List<string> posOs = new List<string>();    // This is the possible options that the player could be hve to chose from.
+    private int randomIndex;                    // Private variable for a random number
+    private int correctIndex;                   // Private variable for the correct option index number e.g. 32 out of 55
 
-    private bool DoOnce;
+    private bool DoOnce;                        // Self explanatory.
 
-    [SerializeField]
-    private IntSO scoreSO;
+    [SerializeField]                           
+    private IntSO scoreSO;                      // Scriptable object that allows the pass through of variables through different reloads of the game.
     
     private void Start()
     {
@@ -60,8 +43,10 @@ public class QuizManager : MonoBehaviour
         Topics = optionsScript.selectedTopics;
         DisplayQuestion();                 // Display the first question
     }
+    //Called Every Game frame.
     private void Update()
     {
+        // Debug tool to check if the question manager was working correctly.
         if(Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene("MainGame");
@@ -156,6 +141,7 @@ public class QuizManager : MonoBehaviour
             else
             {
                 score.text = "Last Try";
+                SceneManager.LoadScene("MainGame");
             }
             
         }
