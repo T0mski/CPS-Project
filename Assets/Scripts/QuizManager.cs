@@ -6,6 +6,7 @@ using static OptionsScript;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using static UnityEditor.ShaderData;
+using System.Collections;
 
 
 
@@ -29,6 +30,7 @@ public class QuizManager : MonoBehaviour
 
     public TMP_Text outQuestionText;          // UI Text for the question
     public Button[] answerButtons;          // Array of Buttons for the answers
+    public TMP_Text[] ButtonTxt;
     public TMP_Text feedbackText;          // Feedback text (e.g., "Correct!" or "Try Again")
 
     public Question questions;     // List of questions
@@ -37,8 +39,8 @@ public class QuizManager : MonoBehaviour
     public OptionsScript optionsScript;
 
     private List<string> Topics;
-    private List<string> temp;
-
+    List<string> posOs = new List<string>();
+    private int randomIndex;
 
     private void Start()
     {
@@ -57,37 +59,63 @@ public class QuizManager : MonoBehaviour
     }
     public void DisplayQuestion()
     {
-        
+        randomIndex = 0; //Random.Range(0, posQs.Count);
         outQuestionText.text = GetRandomQuestionFromDict(Topics, topicQuestions);
+        SetButtonTextToOptions();
+
     }
 
     public string GetRandomQuestionFromDict(List<string> values, Dictionary<string, List<(string, string[])>> QuestionDict)
     {
         List<string> posQs = new List<string>();
+        
+        
         foreach (string value in values)
         {
             if (QuestionDict.TryGetValue(value, out List<(string, string[])> questionsArray))
             {
-                
                 foreach ( var question in questionsArray)
-                {
-
+                { 
                     posQs.Add(question.Item1);
-         
+                    foreach(var option in question.Item2)
+                    {
+                        
+                        posOs.Add(option);
+                        
+                    }
+                    
                 }
             }
         }
+        
         if (posQs.Count > 0)
         {
-            int randomIndex = Random.Range(0, posQs.Count);
-            Debug.Log(randomIndex);
             return posQs[randomIndex];
         }
-
         return "No Matching question found.";
     }
 
+    public void SetButtonTextToOptions()
+    {
+        int randButton = 0; //Random.Range(0, 4);
+        switch (randButton){
+            case 0:
+                ButtonTxt[0].text = posOs[randomIndex    ].ToString();
+                ButtonTxt[1].text = posOs[randomIndex + 1].ToString();
+                ButtonTxt[2].text = posOs[randomIndex + 2].ToString();
+                ButtonTxt[3].text = posOs[randomIndex + 3].ToString();
+                break;
+            case 1:
 
+            case 2:
+
+            case 3:
+
+            default:
+               break;
+
+        }
+    }
 
 
     /*
@@ -107,30 +135,9 @@ public class QuizManager : MonoBehaviour
         Invoke("NextQuestion", 2f); // Wait 2 seconds before moving to the next question
     }
     
-    private void NextQuestion()
-    {
-        feedbackText.text = ""; // Clear feedback text
-
-        currentQuestionIndex++;
-        if (currentQuestionIndex < questions.Count)
-        {
-            DisplayQuestion(); // Display the next question
-        }
-        else
-        {
-            EndQuiz(); // No more questions, end the quiz
-        }
-    }
+  
     */
-    /*private void EndQuiz()
-    {
-        questionText.text = "Quiz Complete!";
-        foreach (var button in answerButtons)
-        {
-            button.gameObject.SetActive(false); // Hide the buttons
-        }
-    }
-    */
+   
     Dictionary<string, List<(string Question, string[] Options)>> topicQuestions = new Dictionary<string, List<(string, string[])>>()
 {
     { "Structure of CPU", new List<(string, string[])>
