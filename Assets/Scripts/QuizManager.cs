@@ -10,6 +10,7 @@ using System.Collections;
 using UnityEngine.SocialPlatforms.Impl;
 using Unity.VisualScripting;
 using UnityEngine.InputSystem.Controls;
+using UnityEditor.Experimental.GraphView;
 
 
 
@@ -155,7 +156,7 @@ public class QuizManager : MonoBehaviour
             if(scoreSO.Value > 0)
             {
                 DecrementScore();
-                gameObject.SetActive(false);
+                won();
             }
             else
             {
@@ -170,22 +171,40 @@ public class QuizManager : MonoBehaviour
             {
                 Lost();
             }
-            else
+            else if (scoreSO.Value == 1) 
             {
+                DecrementScore();
+                score.text = "Last Try";
                 SceneManager.LoadScene("MainGame");
             }
+
+            else
+            {
+                DecrementScore();
+                DecrementScore();
+                SceneManager.LoadScene("MainGame");
+            }
+            
         }
+    }
+    private void won()
+    {
+        
+        gameObject.SetActive(false);
+        SceneManager.LoadScene("MainGame");
+        
     }
     public void Lost()
     {
         SceneManager.LoadScene("Fail");
+        
     }
 
     private void DecrementScore()
     {
         if (!DoOnce)
         {
-            scoreSO.Value += 1;
+            scoreSO.Value -= 1;
             DoOnce = true;
         }
     }

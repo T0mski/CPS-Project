@@ -17,12 +17,14 @@ public class PoleCollisionScript : MonoBehaviour
         {
             CollisionCheck = true;
             CollisionType = other.gameObject.tag;
+            Debug.Log(CollisionType);
             Character.GetComponent<CharacterScript>().AllowedToFall = false;
         }
         else if (other.gameObject.CompareTag("Building"))
         {
             CollisionCheck = true;
             CollisionType = other.gameObject.tag;
+            Debug.Log(CollisionType);
             Character.GetComponent<CharacterScript>().AllowedToFall = true; 
         }
     }

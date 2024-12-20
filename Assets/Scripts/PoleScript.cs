@@ -32,6 +32,7 @@ public class PoleScript : MonoBehaviour
     
 
     public GameObject PipeCollider;
+    public PoleCollisionScript poleCollisionScript;
     public GameObject PlayerCharacter;
     
 
@@ -57,13 +58,11 @@ public class PoleScript : MonoBehaviour
         PoleExtention();
         // Checks collisons 
         CollisionChecker();
-        Vector3 vector3 = new(10f, 100f, 0f);
-        
-        
+   
+
 
         if (GameObject.Find("PoleCollider").GetComponent<PoleCollisionScript>().CollisionType == "NextBuilding" && !HasReset)
         {
-
             transform.rotation = Quaternion.Euler(0f, 0f, 90f);
             PipeCollider.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
             HasReset = true;
@@ -81,34 +80,7 @@ public class PoleScript : MonoBehaviour
         ColliderRot = PipeCollider.transform.rotation;
 
         CustomPivot = GameObject.Find("Pivot").transform;
-        
-
-
-
     }
-    public void Restart()
-    {
-        Scale = transform.localScale;
-        Rotation = transform.rotation;
-        Position = transform.position;
-
-        ColliderPos = PipeCollider.transform.position;
-        ColliderRot = PipeCollider.transform.rotation;
-
-        isSpacePressed = false;
-        CustomPivot = GameObject.Find("Pivot").transform;
-        new Vector3(10f, 100f, 0f);
-
-        NextLength.y += 0f;
-        NextColliderVert.x += 400f;
-        NextVert.x += 400f;
-
-        NewLength.y = 0f;
-        NewVert.x += 400f;
-        NewColliderVert.x += 400f;
-
-    }
-
     private void Polefalling()
     {
         if (Input.GetKeyUp(KeyCode.Space) && !isSpacePressed)
@@ -152,35 +124,8 @@ public class PoleScript : MonoBehaviour
 
         }
     }
-    //this allows me to send the pole back to its origional position.
-    public void ResetPole()
-    {
-        transform.localScale = Scale;
-        transform.position = Position;
-        transform.rotation *= new Quaternion(0f, 0f, 0f, 0f);
-        float ScaleY = Scale.y;
-
-        
-        PipeCollider.transform.rotation *= new Quaternion(0f, 0f, 0f, 0f);
-        PipeCollider.transform.position = ColliderPos;
-
-        
-    }
-    // this allows me to reset the pols position in relation to the players current pos.
-    public void ResetPoleToPlayer()
-    {
-        transform.localScale = Scale;
-        transform.position = PlayerCharacter.transform.position + new Vector3(50,0,0);
-        transform.rotation *= new Quaternion(0f, 0f, 0f, 0f);
-        float ScaleY = Scale.y;
-
-
-
-        PipeCollider.transform.rotation *= new Quaternion(0f, 0f, 0f, 0f);
-        PipeCollider.transform.position = PlayerCharacter.transform.position + new Vector3(50, 50, 0);
-
-
-    }
+   
+    
     //Checks collisions.
     void CollisionChecker()
     {
@@ -194,15 +139,11 @@ public class PoleScript : MonoBehaviour
     //checks if the pole has landed flat on a building.
     void OnBuilding()
     {
-        if (gameObject.transform.rotation.z < -0.70f && gameObject.transform.rotation.z > -0.75f)
-        {
-            PlayerCharacter.GetComponent<CharacterScript>().IsMoving = true;
-
-        }
-
-        else
+        if (/*gameObject.transform.rotation.z < -0.70f && gameObject.transform.rotation.z > -0.75f*/ poleCollisionScript.CollisionType == "NextBuilding" )
         {
             PlayerCharacter.GetComponent<CharacterScript>().IsMoving = true;
         }
+
+        
     }
 }

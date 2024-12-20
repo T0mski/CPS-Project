@@ -23,6 +23,7 @@ public class MainGameScript : MonoBehaviour
     public GameObject Pivot;
 
     private GameObject CurrentBuilding;
+    public GameObject CurrentCollider;
 
     private bool DoneOnce = false;
     private bool DoOnce = false;
@@ -33,41 +34,6 @@ public class MainGameScript : MonoBehaviour
     public CharacterScript characterScript;
     [SerializeField]
     private IntSO scoreSO; 
-    
-    void SpawnBuilding()
-    {
-        RandomNum = Random.Range(0, nextMult.Length);
-        Multiplyer = nextMult[RandomNum];
-
-        Vector3 scale = Tower.transform.localScale;
-        scale.x = scale.x * Multiplyer;
-        transform.localScale = scale;
-        Instantiate(Tower, transform.position, transform.rotation);
-
-       
-    }
-
-    private void MoveAll()
-    {
-        Player.GetComponentInChildren<PoleScript>().ResetPoleToPlayer();
-        GameObject MainCamera = GameObject.Find("Main Camera");
-        GameObject Spawner = GameObject.Find("Spawner");
-        float PivotX = Pivot.transform.position.x;
-        float SpawnerX = Spawner.transform.position.x;
-        float MainCameraX = MainCamera.transform.position.x;
-        PivotX += 400f;
-        SpawnerX += 400f;
-        MainCameraX += 400f;
-        Pivot.transform.position = new Vector3(PivotX, Pivot.transform.position.y, Pivot.transform.position.z);
-        Spawner.transform.position = new Vector3(SpawnerX, Spawner.transform.position.y, Spawner.transform.position.z);
-        MainCamera.transform.position = new Vector3(MainCameraX, MainCamera.transform.position.y, MainCamera.transform.position.z);
-    }
-    
-    void Restart()
-    {
-        DoneOnce = false;
-        DoOnce = false;
-    }
 
     void Update()
     {
@@ -83,11 +49,11 @@ public class MainGameScript : MonoBehaviour
         {
             CurrentBuilding = GameObject.Find("What is below.").GetComponent<whatisBelow>().other;
             CurrentBuilding.name = "PreviousBuilding";
-            CurrentBuilding.tag = "Building";
+            CurrentCollider.tag = "Building";
         }
-        if (scoreSO.Value == 0)
+        if (scoreSO.Value >= 0 && characterScript.HasFallenDown)
         {
-        
+            QuizManager.SetActive(true); 
         }
 
     }

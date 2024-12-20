@@ -403,6 +403,7 @@ MonoBehaviour:
   target: {fileID: 983740671}
   speed: 100
   tower: {fileID: 824790764}
+  HasFallenDown: 0
   IsMoving: 0
   AllowedToFall: 0
 --- !u!1 &133031678
@@ -1268,6 +1269,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &814589046 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3856416917203162940, guid: 3643982eb9e523549b403cc673420df4, type: 3}
+  m_PrefabInstance: {fileID: 1866362058}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &824790764 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2194286675433816482, guid: 3643982eb9e523549b403cc673420df4, type: 3}
@@ -1729,6 +1735,7 @@ MonoBehaviour:
   extentionSpeed: 1000
   isRotating: 0
   PipeCollider: {fileID: 1316127106}
+  poleCollisionScript: {fileID: 1316127113}
   PlayerCharacter: {fileID: 85493005}
 --- !u!212 &1426044954
 SpriteRenderer:
@@ -2492,7 +2499,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2194286675433816482, guid: 3643982eb9e523549b403cc673420df4, type: 3}
       propertyPath: m_TagString
-      value: NextBuilding
+      value: Building
       objectReference: {fileID: 0}
     - target: {fileID: 3822758051523156083, guid: 3643982eb9e523549b403cc673420df4, type: 3}
       propertyPath: m_LocalScale.y
@@ -2588,8 +2595,10 @@ MonoBehaviour:
   Target: {fileID: 983740670}
   Player: {fileID: 1398154736}
   Pivot: {fileID: 1302654078}
+  CurrentCollider: {fileID: 814589046}
   Deadzone: -10
   QuizManager: {fileID: 1419284983}
+  characterScript: {fileID: 85493011}
   scoreSO: {fileID: 11400000, guid: 6e0389dd2654cc34aa29dab44c757ea8, type: 2}
 --- !u!1 &2065645751
 GameObject:

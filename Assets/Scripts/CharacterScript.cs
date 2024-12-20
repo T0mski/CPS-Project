@@ -16,7 +16,7 @@ public class CharacterScript : MonoBehaviour
     public GameObject tower; // the game object of the next building to get the target.
     private bool colliding = false; // Whether or not the player is colliding witht the ground.
     private Vector3 ThisObject; // A variable of the 3D Vector of this game objects location.
-    private bool HasFallenDown = false;
+    public bool HasFallenDown = false;
     public bool IsMoving;
     public bool AllowedToFall = true;
 
@@ -122,7 +122,7 @@ public class CharacterScript : MonoBehaviour
 
     private void HasFallen()
     {
-        if (transform.position.y < 450f && GameObject.Find("PoleCollider").GetComponent<PoleCollisionScript>().CollisionType == "Building")
+        if (GameObject.Find("PoleCollider").GetComponent<PoleCollisionScript>().CollisionType == "Building")
         {
             HasFallenDown = true;
             
