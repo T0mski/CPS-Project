@@ -565,10 +565,6 @@ MonoBehaviour:
   - {fileID: 1729190640}
   feedbackText: {fileID: 156704896}
   score: {fileID: 1517451892}
-  questions:
-    questionText: 
-    options: []
-    correctOptionIndex: 0
   optionsScript: {fileID: 803536004}
   scoreSO: {fileID: 11400000, guid: 6e0389dd2654cc34aa29dab44c757ea8, type: 2}
 --- !u!114 &135171195
@@ -2557,7 +2553,7 @@ GameObject:
   - component: {fileID: 2052944774}
   - component: {fileID: 2052944775}
   m_Layer: 0
-  m_Name: Spawner
+  m_Name: MainGameScript
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

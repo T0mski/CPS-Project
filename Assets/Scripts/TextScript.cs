@@ -5,18 +5,14 @@ using UnityEngine;
 
 public class TextScript : MonoBehaviour
 {
-    private int Score;
-    public TMP_Text score;
+    public TMP_Text score; // Reference to the Text component on the canvas panel.
     [SerializeField]
-    private IntSO scoreSO;
+    private IntSO scoreSO; // privare inscance of an int scriptable object (SO) 
 
    private void Update()
     {
-
+        // sets the text to the value of the SO.
         score.text = scoreSO.Value.ToString();
-        
-        
-        
 
     }
 }

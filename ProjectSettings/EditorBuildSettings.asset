@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/QuestionOptions.unity
     guid: 937738ba6248262449b8da06ba90f43c
+  - enabled: 1
+    path: Assets/Scenes/Fail.unity
+    guid: 12cfe1386aa4c734187550656cafee28
   m_configObjects: {}

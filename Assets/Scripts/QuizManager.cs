@@ -96,38 +96,41 @@ public class QuizManager : MonoBehaviour
     }
     public void SetButtonTextToOptions()
     {
+        // gets a random number between 0 and 3
         int randButton = Random.Range(0, 4);
-        randomIndex *= 4;
+        randomIndex *= 4;       // multiplies itself by 4
         switch (randButton){
-            case 0:
+            case 0: //sets option A to be the correct answer
+                // seach sets itself the the random index multiplyed by 4 to get the correct 4 options then increments the index by 1
+                // depending on what place the button is in the list. does this for each case.
                 ButtonTxt[0].text = posOs[randomIndex    ].ToString();
                 ButtonTxt[1].text = posOs[randomIndex + 1].ToString();
                 ButtonTxt[2].text = posOs[randomIndex + 2].ToString();
                 ButtonTxt[3].text = posOs[randomIndex + 3].ToString();
                 correctIndex = 0;
                 break;
-            case 1:
+            case 1://sets option B to be the correct answer
                 ButtonTxt[1].text = posOs[randomIndex].ToString();
                 ButtonTxt[0].text = posOs[randomIndex + 1].ToString();
                 ButtonTxt[2].text = posOs[randomIndex + 2].ToString();
                 ButtonTxt[3].text = posOs[randomIndex + 3].ToString();
                 correctIndex = 1;
                 break;
-            case 2:
+            case 2://sets option C to be the correct answer
                 ButtonTxt[2].text = posOs[randomIndex].ToString();
                 ButtonTxt[1].text = posOs[randomIndex + 1].ToString();
                 ButtonTxt[0].text = posOs[randomIndex + 2].ToString();
                 ButtonTxt[3].text = posOs[randomIndex + 3].ToString();
                 correctIndex = 2;
                 break;
-            case 3:
+            case 3://sets option D to be the correct answer
                 ButtonTxt[3].text = posOs[randomIndex].ToString();
                 ButtonTxt[1].text = posOs[randomIndex + 1].ToString();
                 ButtonTxt[2].text = posOs[randomIndex + 2].ToString();
                 ButtonTxt[0].text = posOs[randomIndex + 3].ToString();
                 correctIndex = 3;
                 break;
-            default:
+            default:// default value just skips the case.
                break;
 
         }
