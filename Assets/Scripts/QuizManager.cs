@@ -7,6 +7,9 @@ using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using static UnityEditor.ShaderData;
 using System.Collections;
+using UnityEngine.SocialPlatforms.Impl;
+using Unity.VisualScripting;
+using UnityEngine.InputSystem.Controls;
 
 
 
@@ -33,15 +36,22 @@ public class QuizManager : MonoBehaviour
     public TMP_Text[] ButtonTxt;
     public TMP_Text feedbackText;          // Feedback text (e.g., "Correct!" or "Try Again")
 
-    public Question questions;     // List of questions
-   // private int currentQuestionIndex = 0;                      // Current question index
+    public TMP_Text score;
 
+    public Question questions;     // List of questions
     public OptionsScript optionsScript;
 
     private List<string> Topics;
+    List<string> posQs = new List<string>();
     List<string> posOs = new List<string>();
     private int randomIndex;
+    private int correctIndex;
 
+    private bool DoOnce;
+
+    [SerializeField]
+    private IntSO scoreSO;
+    
     private void Start()
     {
         
@@ -59,7 +69,7 @@ public class QuizManager : MonoBehaviour
     }
     public void DisplayQuestion()
     {
-        randomIndex = 0; //Random.Range(0, posQs.Count);
+        DoOnce = false;
         outQuestionText.text = GetRandomQuestionFromDict(Topics, topicQuestions);
         SetButtonTextToOptions();
 
@@ -67,7 +77,7 @@ public class QuizManager : MonoBehaviour
 
     public string GetRandomQuestionFromDict(List<string> values, Dictionary<string, List<(string, string[])>> QuestionDict)
     {
-        List<string> posQs = new List<string>();
+        
         
         
         foreach (string value in values)
@@ -87,7 +97,7 @@ public class QuizManager : MonoBehaviour
                 }
             }
         }
-        
+        randomIndex = Random.Range(0, posQs.Count);
         if (posQs.Count > 0)
         {
             return posQs[randomIndex];
@@ -97,20 +107,37 @@ public class QuizManager : MonoBehaviour
 
     public void SetButtonTextToOptions()
     {
-        int randButton = 0; //Random.Range(0, 4);
+        int randButton = Random.Range(0, 4);
+        randomIndex *= 4;
         switch (randButton){
             case 0:
                 ButtonTxt[0].text = posOs[randomIndex    ].ToString();
                 ButtonTxt[1].text = posOs[randomIndex + 1].ToString();
                 ButtonTxt[2].text = posOs[randomIndex + 2].ToString();
                 ButtonTxt[3].text = posOs[randomIndex + 3].ToString();
+                correctIndex = 0;
                 break;
             case 1:
-
+                ButtonTxt[1].text = posOs[randomIndex].ToString();
+                ButtonTxt[0].text = posOs[randomIndex + 1].ToString();
+                ButtonTxt[2].text = posOs[randomIndex + 2].ToString();
+                ButtonTxt[3].text = posOs[randomIndex + 3].ToString();
+                correctIndex = 1;
+                break;
             case 2:
-
+                ButtonTxt[2].text = posOs[randomIndex].ToString();
+                ButtonTxt[1].text = posOs[randomIndex + 1].ToString();
+                ButtonTxt[0].text = posOs[randomIndex + 2].ToString();
+                ButtonTxt[3].text = posOs[randomIndex + 3].ToString();
+                correctIndex = 2;
+                break;
             case 3:
-
+                ButtonTxt[3].text = posOs[randomIndex].ToString();
+                ButtonTxt[1].text = posOs[randomIndex + 1].ToString();
+                ButtonTxt[2].text = posOs[randomIndex + 2].ToString();
+                ButtonTxt[0].text = posOs[randomIndex + 3].ToString();
+                correctIndex = 3;
+                break;
             default:
                break;
 
@@ -118,26 +145,53 @@ public class QuizManager : MonoBehaviour
     }
 
 
-    /*
+   
     public void CheckAnswer(int selectedOptionIndex)
     {
         // Check if the selected option is correct
-        if (selectedOptionIndex == questions[currentQuestionIndex].correctOptionIndex)
+        if (selectedOptionIndex == correctIndex)
         {
             feedbackText.text = "Correct!";
+            if(scoreSO.Value > 0)
+            {
+                DecrementScore();
+                gameObject.SetActive(false);
+            }
+            else
+            {
+                score.text = "Last Try";
+            }
+            
         }
         else
         {
-            feedbackText.text = "Try Again!";
+            feedbackText.text = "Incorrect!";
+            if (scoreSO.Value == 0)
+            {
+                Lost();
+            }
+            else
+            {
+                SceneManager.LoadScene("MainGame");
+            }
         }
+    }
+    public void Lost()
+    {
+        SceneManager.LoadScene("Fail");
+    }
 
-        // Wait for a moment and load the next question
-        Invoke("NextQuestion", 2f); // Wait 2 seconds before moving to the next question
+    private void DecrementScore()
+    {
+        if (!DoOnce)
+        {
+            scoreSO.Value += 1;
+            DoOnce = true;
+        }
     }
     
-  
-    */
-   
+
+
     Dictionary<string, List<(string Question, string[] Options)>> topicQuestions = new Dictionary<string, List<(string, string[])>>()
 {
     { "Structure of CPU", new List<(string, string[])>

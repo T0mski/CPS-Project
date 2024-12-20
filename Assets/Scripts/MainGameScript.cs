@@ -98,7 +98,7 @@ public class MainGameScript : MonoBehaviour
 
     private void Start()
     {
-      //  QuizManager.SetActive(false);
+      QuizManager.SetActive(false);
     }
 }
 

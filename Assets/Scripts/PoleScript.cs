@@ -201,6 +201,7 @@ public class PoleScript : MonoBehaviour
         else
         {
             PlayerCharacter.GetComponent<CharacterScript>().IsMoving = true;
+            GameObject.Find("QuizManager").SetActive(true);
         }
     }
 }
