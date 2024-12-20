@@ -30,9 +30,9 @@ public class MainGameScript : MonoBehaviour
     public float Deadzone = -10f;
     public GameObject QuizManager;
     
-
+    public CharacterScript characterScript;
     [SerializeField]
-    private IntSO scoreSO;
+    private IntSO scoreSO; 
     
     void SpawnBuilding()
     {
@@ -85,6 +85,8 @@ public class MainGameScript : MonoBehaviour
             CurrentBuilding.name = "PreviousBuilding";
             CurrentBuilding.tag = "Building";
         }
+        if(scoreSO.Value == 0 &&)
+
     }
 
     private void AddScore()
