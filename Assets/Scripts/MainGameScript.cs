@@ -30,6 +30,9 @@ public class MainGameScript : MonoBehaviour
 
     public float Deadzone = -10f;
     public GameObject QuizManager;
+
+    public GameObject PauseMenu;
+
     
     public CharacterScript characterScript;
     [SerializeField]
@@ -60,6 +63,11 @@ public class MainGameScript : MonoBehaviour
             QuizManager.SetActive(true); 
         }
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseMenu.SetActive(true);
+        }
+
     }
 
     private void AddScore()
@@ -75,6 +83,7 @@ public class MainGameScript : MonoBehaviour
     private void Start()
     {
       QuizManager.SetActive(false);
+      PauseMenu.SetActive(false);
     }
 }
 
