@@ -5,11 +5,12 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
-    public bool Paused;
+    [SerializeField]
+    private BoolSO PausedSO;
     public void Resume()
     {
         gameObject.SetActive(false);
-        Paused = false;
+        PausedSO.Value = false;
     }
 
     public void QuitGame()

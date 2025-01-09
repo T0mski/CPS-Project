@@ -19,7 +19,8 @@ public class CharacterScript : MonoBehaviour
     public bool HasFallenDown = false;
     public bool IsMoving;
     public bool AllowedToFall = true;
-
+    [SerializeField]
+    private BoolSO PausedSO;
     // This function is called at the start of the game and only at the start of the game. 
     private void Start()
     {
@@ -31,6 +32,7 @@ public class CharacterScript : MonoBehaviour
     //This is the function that is called every game frame.
     private void Update()
     {
+        
         if (AllowedToFall)
         {
             gravity();

@@ -45,20 +45,21 @@ public class PoleScript : MonoBehaviour
 
     private bool HasReset;
 
-
+    [SerializeField]
+    private BoolSO PausedSO;
 
     // Update fucntion called every game tick.
     private void Update()
     {
-
-
-        // calls the PoleFalling Functuion every game tick.
-        Polefalling();
-        // calls the PoleExtention Functuion every game tick.
-        PoleExtention();
-        // Checks collisons 
-        CollisionChecker();
-
+        if (PausedSO.Value == false)
+        {
+            // calls the PoleFalling Functuion every game tick.
+            Polefalling();
+            // calls the PoleExtention Functuion every game tick.
+            PoleExtention();
+            // Checks collisons 
+            CollisionChecker();
+        }
     }
     private void Start()
     {

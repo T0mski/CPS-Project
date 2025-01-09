@@ -43,16 +43,6 @@ public class QuizManager : MonoBehaviour
         Topics = optionsScript.selectedTopics;  // sets topic list equal to the 
         DisplayQuestion();                      // Display the first question
     }
-    //Called Every Game frame.
-    private void Update()
-    {
-        // Debug tool to check if the question manager was working correctly.
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            SceneManager.LoadScene("MainGame");
-        }
-
-    }
     public void DisplayQuestion()
     {
         DoOnce = false;

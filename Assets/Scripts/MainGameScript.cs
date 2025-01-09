@@ -32,42 +32,46 @@ public class MainGameScript : MonoBehaviour
     public GameObject QuizManager;
 
     public GameObject PauseMenu;
-
+    public bool Paused;
     
     public CharacterScript characterScript;
     [SerializeField]
-    private IntSO scoreSO; 
+    private IntSO scoreSO;
+    [SerializeField]
+    private BoolSO PausedSO;
 
     void Update()
     {
-        // once the player has made it to the next building it will "Reload the game" (starts again)
-        // also adds score to the score card.
-        if (Character.transform.position.x == Tower.transform.position.x && !DoneOnce)
-        { 
-
-            DoneOnce = true;
-            SceneManager.LoadScene("MainGame");
-            AddScore();
-        }
-        // Sets different atributes of the object below the player .
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (PausedSO.Value == false)
         {
-            CurrentBuilding = GameObject.Find("What is below.").GetComponent<whatisBelow>().other;
-            CurrentBuilding.name = "PreviousBuilding";
-            CurrentCollider.tag = "Building";
-        }
-        // Check if the player has fallen down to show the QuizManager so the player
-        // can answer the question.
-        if (scoreSO.Value >= 0 && characterScript.HasFallenDown)
-        {
-            QuizManager.SetActive(true); 
-        }
+            // once the player has made it to the next building it will "Reload the game" (starts again)
+            // also adds score to the score card.
+            if (Character.transform.position.x == Tower.transform.position.x && !DoneOnce)
+            {
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            PauseMenu.SetActive(true);
-        }
+                DoneOnce = true;
+                SceneManager.LoadScene("MainGame");
+                AddScore();
+            }
+            // Sets different atributes of the object below the player .
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                CurrentBuilding = GameObject.Find("What is below.").GetComponent<whatisBelow>().other;
+                CurrentBuilding.name = "PreviousBuilding";
+                CurrentCollider.tag = "Building";
+            }
+            // Check if the player has fallen down to show the QuizManager so the player
+            // can answer the question.
+            if (scoreSO.Value >= 0 && characterScript.HasFallenDown)
+            {
+                QuizManager.SetActive(true);
+            }
 
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                PauseMenu.SetActive(true);
+            }
+        }
     }
 
     private void AddScore()
