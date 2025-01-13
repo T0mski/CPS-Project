@@ -67,10 +67,7 @@ public class MainGameScript : MonoBehaviour
                 QuizManager.SetActive(true);
             }
 
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                PauseMenu.SetActive(true);
-            }
+           
         }
     }
 
