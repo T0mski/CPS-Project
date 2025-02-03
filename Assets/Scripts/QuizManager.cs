@@ -120,8 +120,8 @@ public class QuizManager : MonoBehaviour
                 ButtonTxt[0].text = posOs[randomIndex + 3].ToString();
                 correctIndex = 3;
                 break;
-            default:// default value just skips the case.
-               break;
+            //default:// default value just skips the case.
+            //    break;
 
         }
     }

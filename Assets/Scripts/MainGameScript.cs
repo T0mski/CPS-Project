@@ -84,7 +84,6 @@ public class MainGameScript : MonoBehaviour
     private void Start()
     {
       QuizManager.SetActive(false);
-      PauseMenu.SetActive(false);
     }
 }
 

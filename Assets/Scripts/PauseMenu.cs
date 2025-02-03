@@ -6,11 +6,17 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
+    public GameObject pauseMenu;
+
     [SerializeField]
     private BoolSO PausedSO;
+    private void Start()
+    {
+        PausedSO.Value = false;
+    }
     public void Resume()
     {
-        gameObject.SetActive(false);
+        pauseMenu.SetActive(false);
         PausedSO.Value = false;
         Time.timeScale = 1;
     }
@@ -28,7 +34,7 @@ public class PauseMenu : MonoBehaviour
     }
     private void Pause()
     {
-        gameObject.SetActive(true);
+        pauseMenu.SetActive(true);
         Time.timeScale = 0;
         PausedSO.Value = true;
     }
