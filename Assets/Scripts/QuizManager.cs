@@ -82,7 +82,7 @@ public class QuizManager : MonoBehaviour
         //else it returns "no Matching Question" which shouldnt be possible.
         if (posQs.Count > 0)
         {
-            print("Questiion:   "+ posQs[randomIndex]);
+           
             return posQs[randomIndex];
 
         }
@@ -98,7 +98,6 @@ public class QuizManager : MonoBehaviour
 
             int OptionsNum = (randomIndex * 4) + i;
             Options.Add(posOs[OptionsNum]);
-
         }
         return Options;
     }
@@ -155,7 +154,7 @@ public class QuizManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Wrong Answer!");
+           
             // Handle incorrect answer logic here
             feedbackText.text = "Incorrect!";
             if (scoreSO.Value == 0)
