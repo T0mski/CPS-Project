@@ -11,6 +11,7 @@ using UnityEngine.SocialPlatforms.Impl;
 using Unity.VisualScripting;
 using UnityEngine.InputSystem.Controls;
 using UnityEditor.Experimental.GraphView;
+using System.Security.Cryptography;
 
 
 
@@ -30,6 +31,7 @@ public class QuizManager : MonoBehaviour
     List<string> posOs = new List<string>();    // This is the possible options that the player could be hve to chose from.
     private int randomIndex;                    // Private variable for a random number
     private int correctIndex;                   // Private variable for the correct option index number e.g. 32 out of 55
+    private string currentQuestion;
 
     private bool DoOnce;                        // Self explanatory.
 
@@ -80,58 +82,67 @@ public class QuizManager : MonoBehaviour
         //else it returns "no Matching Question" which shouldnt be possible.
         if (posQs.Count > 0)
         {
+            print("Questiion:   "+ posQs[randomIndex]);
             return posQs[randomIndex];
+
         }
         return "No Matching question found.";
     }
+
+    public List<string> RemoveNonUsedPosOs()
+    {
+        List<string> Options = new List<string>();
+        // need the posOs array, current question value.
+        for (int i = 0; i < answerButtons.Length; i++)
+        {
+
+            int OptionsNum = (randomIndex * 4) + i;
+            Options.Add(posOs[OptionsNum]);
+
+        }
+        return Options;
+    }
+
     public void SetButtonTextToOptions()
     {
-        // gets a random number between 0 and 3
-        int randButton = Random.Range(0, 4);
-        randomIndex *= 4;       // multiplies itself by 4
-        switch (randButton){
-            case 0: //sets option A to be the correct answer
-                // seach sets itself the the random index multiplyed by 4 to get the correct 4 options then increments the index by 1
-                // depending on what place the button is in the list. does this for each case.
-                ButtonTxt[0].text = posOs[randomIndex    ].ToString();
-                ButtonTxt[1].text = posOs[randomIndex + 1].ToString();
-                ButtonTxt[2].text = posOs[randomIndex + 2].ToString();
-                ButtonTxt[3].text = posOs[randomIndex + 3].ToString();
-                correctIndex = 0;
-                break;
-            case 1://sets option B to be the correct answer
-                ButtonTxt[1].text = posOs[randomIndex].ToString();
-                ButtonTxt[0].text = posOs[randomIndex + 1].ToString();
-                ButtonTxt[2].text = posOs[randomIndex + 2].ToString();
-                ButtonTxt[3].text = posOs[randomIndex + 3].ToString();
-                correctIndex = 1;
-                break;
-            case 2://sets option C to be the correct answer
-                ButtonTxt[2].text = posOs[randomIndex].ToString();
-                ButtonTxt[1].text = posOs[randomIndex + 1].ToString();
-                ButtonTxt[0].text = posOs[randomIndex + 2].ToString();
-                ButtonTxt[3].text = posOs[randomIndex + 3].ToString();
-                correctIndex = 2;
-                break;
-            case 3://sets option D to be the correct answer
-                ButtonTxt[3].text = posOs[randomIndex].ToString();
-                ButtonTxt[1].text = posOs[randomIndex + 1].ToString();
-                ButtonTxt[2].text = posOs[randomIndex + 2].ToString();
-                ButtonTxt[0].text = posOs[randomIndex + 3].ToString();
-                correctIndex = 3;
-                break;
-            //default:// default value just skips the case.
-            //    break;
+
+        List<string> AcctualOptions = RemoveNonUsedPosOs();
+        // each if the posOs are in the array, need to make a function that removes all non needed options.
+        
+        
+        string correctAnswer = AcctualOptions[0];
+        List<string> incorrectAnswers = new List<string>(AcctualOptions);
+        incorrectAnswers.RemoveAt(0);
+        // gets a random number between 0 and Length of answerButtons argitray.
+        int CorrectButtonIndex = Random.Range(0, answerButtons.Length);
+        // multiplies itself by 4
+        for (int i = 0, j = 0; i < answerButtons.Length; i++)
+        {
+            TMP_Text buttonText = ButtonTxt[i];
+            answerButtons[i].onClick.RemoveAllListeners();
+
+            if (i == CorrectButtonIndex)
+            {
+                buttonText.text = correctAnswer;
+                answerButtons[i].onClick.AddListener(() => CheckAnswer(true));
+            }
+            else
+            {   
+                // Set incorrect answers
+                buttonText.text = incorrectAnswers[j];
+                answerButtons[i].onClick.AddListener(() => CheckAnswer(false));
+                j++;
+            }
+
 
         }
     }
-    public void CheckAnswer(int selectedOptionIndex)
+    private void CheckAnswer(bool isCorrect)
     {
-        // Check if the selected option is correct
-        if (selectedOptionIndex == correctIndex)
+        if (isCorrect)
         {
             feedbackText.text = "Correct!";
-            if(scoreSO.Value > 0)
+            if (scoreSO.Value > 0)
             {
                 DecrementScore();
                 won();
@@ -141,16 +152,17 @@ public class QuizManager : MonoBehaviour
                 score.text = "Last Try";
                 SceneManager.LoadScene("MainGame");
             }
-            
         }
         else
         {
+            Debug.Log("Wrong Answer!");
+            // Handle incorrect answer logic here
             feedbackText.text = "Incorrect!";
             if (scoreSO.Value == 0)
             {
                 Lost();
             }
-            else if (scoreSO.Value == 1) 
+            else if (scoreSO.Value == 1)
             {
                 DecrementScore();
                 score.text = "Last Try";
@@ -163,9 +175,10 @@ public class QuizManager : MonoBehaviour
                 DecrementScore();
                 SceneManager.LoadScene("MainGame");
             }
-            
         }
     }
+
+  
     private void won()
     {
         
