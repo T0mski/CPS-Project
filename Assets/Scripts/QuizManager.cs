@@ -2,16 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using static OptionsScript;
-using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
-using static UnityEditor.ShaderData;
-using System.Collections;
-using UnityEngine.SocialPlatforms.Impl;
-using Unity.VisualScripting;
-using UnityEngine.InputSystem.Controls;
-using UnityEditor.Experimental.GraphView;
-using System.Security.Cryptography;
+
 
 
 
