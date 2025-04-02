@@ -1,26 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
-using Unity.Mathematics;
-using Unity.VisualScripting;
-using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
 public class MainGameScript : MonoBehaviour
 {
     public GameObject Tower;
     private float[] nextMult = new float[7] { 1f, 1.5f, 0.3f, 0.5f, 1.3f, 1.8f, 0.7f };
-    private int RandomNum;
-    private float Multiplyer;
     public GameObject Character;
-    public GameObject Target;
-    public GameObject Player;
-
-    public GameObject Pivot;
 
     private GameObject CurrentBuilding;
     public GameObject CurrentCollider;
@@ -28,11 +14,10 @@ public class MainGameScript : MonoBehaviour
     private bool DoneOnce = false;
     private bool DoOnce = false;
 
-    public float Deadzone = -10f;
     public GameObject QuizManager;
 
     public GameObject PauseMenu;
-    public bool Paused;
+
     
     public CharacterScript characterScript;
     [SerializeField]
@@ -67,6 +52,18 @@ public class MainGameScript : MonoBehaviour
                 QuizManager.SetActive(true);
             }
 
+            if(Input.GetKeyDown(KeyCode.Q))
+            {
+                int RandomNum = Random.Range(0, 7);
+                float scaleFactor = nextMult[RandomNum];
+                Vector3 origionalScale = Tower.transform.localScale;
+                if (origionalScale.x == 0)
+                {
+                    origionalScale.x = 1f;
+                }
+                Tower.transform.localScale = new Vector3(origionalScale.x * scaleFactor, origionalScale.y, origionalScale.z);
+            }
+
            
         }
     }
@@ -83,7 +80,7 @@ public class MainGameScript : MonoBehaviour
 
     private void Start()
     {
-      QuizManager.SetActive(false);
-    }
+        QuizManager.SetActive(false);
+     }
 }
 

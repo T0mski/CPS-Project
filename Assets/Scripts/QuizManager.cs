@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 
 
@@ -25,11 +26,9 @@ public class QuizManager : MonoBehaviour
     private int correctIndex;                   // Private variable for the correct option index number e.g. 32 out of 55
     private string currentQuestion;
 
-    private bool DoOnce;                        // Self explanatory.
-
     [SerializeField]                           
     private IntSO scoreSO;                      // Scriptable object that allows the pass through of variables through different reloads of the game.
-    
+
     private void Start()
     {
         
@@ -39,7 +38,6 @@ public class QuizManager : MonoBehaviour
     }
     public void DisplayQuestion()
     {
-        DoOnce = false;
         outQuestionText.text = GetRandomQuestionFromDict(Topics, topicQuestions);
         SetButtonTextToOptions();
 
@@ -111,12 +109,15 @@ public class QuizManager : MonoBehaviour
         {
             TMP_Text buttonText = ButtonTxt[i];
             answerButtons[i].onClick.RemoveAllListeners();
-
+            // if the current loop index is equal to the random number then set that button index to the correct answer
+            // and add the event listender.
             if (i == CorrectButtonIndex)
             {
                 buttonText.text = correctAnswer;
                 answerButtons[i].onClick.AddListener(() => CheckAnswer(true));
             }
+            // else fill in the rest of the buttons with incorrect answers.
+            // add the incorrect answer listeners.
             else
             {   
                 // Set incorrect answers
@@ -128,15 +129,20 @@ public class QuizManager : MonoBehaviour
 
         }
     }
+    // takes an input of if the button is for a correct answer or not.
     private void CheckAnswer(bool isCorrect)
     {
+        // if the variable is true.
         if (isCorrect)
-        {
+        { // sets feedback to correct and decreases the score and
+          // calls removes the quiz manager and reloads the scene.
             feedbackText.text = "Correct!";
             if (scoreSO.Value > 0)
             {
-                DecrementScore();
-                won();
+
+                scoreSO.Value -= 1;
+                gameObject.SetActive(false);
+                SceneManager.LoadScene("MainGame");
             }
             else
             {
@@ -144,55 +150,33 @@ public class QuizManager : MonoBehaviour
                 SceneManager.LoadScene("MainGame");
             }
         }
+        // if isCorrect variable is anything but true.
         else
         {
            
             // Handle incorrect answer logic here
+            // if is 0 call lost procedure.
             feedbackText.text = "Incorrect!";
             if (scoreSO.Value == 0)
             {
-                Lost();
-            }
+                    SceneManager.LoadScene("Fail");
+               }
+            // if score is 1 decrease and reload scene (resets the game state)
             else if (scoreSO.Value == 1)
             {
-                DecrementScore();
+                scoreSO.Value -= 1;
                 score.text = "Last Try";
                 SceneManager.LoadScene("MainGame");
             }
-
+            // everything else decrease twice and reload scene.
             else
             {
-                DecrementScore();
-                DecrementScore();
+                scoreSO.Value -= 2;
                 SceneManager.LoadScene("MainGame");
             }
         }
     }
-
   
-    private void won()
-    {
-        
-        gameObject.SetActive(false);
-        SceneManager.LoadScene("MainGame");
-        
-    }
-    public void Lost()
-    {
-        SceneManager.LoadScene("Fail");
-        
-    }
-    private void DecrementScore()
-    {
-        if (!DoOnce)
-        {
-            scoreSO.Value -= 1;
-            DoOnce = true;
-        }
-    }
-    
-
-
     Dictionary<string, List<(string Question, string[] Options)>> topicQuestions = new Dictionary<string, List<(string, string[])>>()
 {
     { "Structure of CPU", new List<(string, string[])>

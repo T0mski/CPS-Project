@@ -14,11 +14,14 @@ public class PauseMenu : MonoBehaviour
     {
         PausedSO.Value = false;
     }
+    // Used to reume the game when called.
     public void Resume()
     {
-        pauseMenu.SetActive(false);
-        PausedSO.Value = false;
-        Time.timeScale = 1;
+        pauseMenu.SetActive(false); // Deactivates the pause menu.
+        Time.timeScale = 1; // Restarts the game time to default settings.
+        PausedSO.Value = false;// Sets the program wide Paused variable to true
+                               // stopping specific functions of the game
+
     }
 
     public void QuitGame()
@@ -32,11 +35,13 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
         Time.timeScale = 1;
     }
+    // used to pause the game when called.
     private void Pause()
     {
-        pauseMenu.SetActive(true);
-        Time.timeScale = 0;
-        PausedSO.Value = true;
+        pauseMenu.SetActive(true); // activates the pause menu.
+        Time.timeScale = 0; // stops the game time.
+        PausedSO.Value = true; // sets the program wide Paused variable to true
+                               // stopping specific functions of the game
     }
 
     private void Update()
