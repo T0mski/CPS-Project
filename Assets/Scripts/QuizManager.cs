@@ -137,18 +137,18 @@ public class QuizManager : MonoBehaviour
         { // sets feedback to correct and decreases the score and
           // calls removes the quiz manager and reloads the scene.
             feedbackText.text = "Correct!";
-            if (scoreSO.Value > 0)
+            if (scoreSO.Value == 0)
             {
 
-                scoreSO.Value -= 1;
-                gameObject.SetActive(false);
+                gameObject.SetActive(false);   
+                score.SetText("Last Try");
                 SceneManager.LoadScene("MainGame");
             }
             else
             {
-                score.text = "Last Try";
                 SceneManager.LoadScene("MainGame");
             }
+            
         }
         // if isCorrect variable is anything but true.
         else
@@ -165,7 +165,6 @@ public class QuizManager : MonoBehaviour
             else if (scoreSO.Value == 1)
             {
                 scoreSO.Value -= 1;
-                score.text = "Last Try";
                 SceneManager.LoadScene("MainGame");
             }
             // everything else decrease twice and reload scene.
