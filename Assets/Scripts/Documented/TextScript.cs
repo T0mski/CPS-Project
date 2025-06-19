@@ -13,6 +13,6 @@ public class TextScript : MonoBehaviour
     {
         // sets the text to the value of the SO.
         score.text = scoreSO.Value.ToString();
-
+        
     }
 }

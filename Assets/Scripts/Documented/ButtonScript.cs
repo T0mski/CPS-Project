@@ -1,14 +1,6 @@
-using JetBrains.Annotations;
-using System;
-using Unity;
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEditor.SceneManagement;
+
 
 public class ButtonScript : MonoBehaviour
 {

@@ -14,11 +14,10 @@ public class CharacterScript : MonoBehaviour
     public float speed; // speed constant
     private Vector3 targetpos; // the 3D Vector of the locatiom that you want the player to move towards.
     public GameObject tower; // the game object of the next building to get the target.
-    private bool colliding = false; // Whether or not the player is colliding witht the ground.
-    private Vector3 ThisObject; // A variable of the 3D Vector of this game objects location.
+
     public bool HasFallenDown = false;
     public bool IsMoving;
-    public bool AllowedToFall = true;
+ 
     [SerializeField]
     private BoolSO PausedSO;
     // This function is called at the start of the game and only at the start of the game. 
@@ -32,12 +31,6 @@ public class CharacterScript : MonoBehaviour
     //This is the function that is called every game frame.
     private void Update()
     {
-        
-        if (AllowedToFall)
-        {
-            gravity();
-        }
-
         HasFallen();
         PlayerMove();
     }
@@ -81,45 +74,19 @@ public class CharacterScript : MonoBehaviour
         
     }
     
-    // moves the player down by a specific amount of pixels every frame. Acts as gravity.
-    public void gravity()
-    {
-        if (!colliding)
-        {
-            ThisObject = transform.position;
-            ThisObject.y += (2 * -9.8f) * Time.deltaTime;
-            transform.position = ThisObject;
-        }
-    }
-    //Checks the collisions between the two game objects.
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject != null)
-        {
-            colliding = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject != null)
-        {
-            colliding = false;
-        }
-    }
     // My adaptation of the Unity Vector3.MoveTowards function but only affects 1 direction.
     private float MoveTo(float CurrentPos, float TargetPos, float MaxStep)
     {
-        float num = TargetPos - CurrentPos;
-        float num2 = num * num;
+        float Diff = TargetPos - CurrentPos; // Gets the difference between the target and the current position/
+        float DiffSqurd = Diff * Diff; // squares the difference.
 
-        if (num2 == 0f || (MaxStep >= 0f && num2 <= MaxStep * MaxStep))
+        if (DiffSqurd == 0f || (MaxStep >= 0f && DiffSqurd <= MaxStep * MaxStep))// if the sqare if the difference is 0 or diff squared is less or equal to max
+                                                                                 // step squared return the target
         {
             return TargetPos;
         }
-
-        float num3 = (float)Math.Sqrt(num2);
-        return (CurrentPos + num / num3 * MaxStep);
+            
+        return (CurrentPos + Diff / Diff * MaxStep); // else return the current position + the difference ver the differecne x max step.
     }
 
     private void HasFallen()

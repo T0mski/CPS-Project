@@ -18,14 +18,12 @@ public class PoleCollisionScript : MonoBehaviour
         {
             CollisionCheck = true;
             CollisionType = other.gameObject.tag;
-            Character.GetComponent<CharacterScript>().AllowedToFall = false;
         }
         // Called when the collider lands on the correct building.
         else if (other.gameObject.CompareTag("Building"))
         {
             CollisionCheck = true;
             CollisionType = other.gameObject.tag;
-            Character.GetComponent<CharacterScript>().AllowedToFall = true; 
         }
     }
 

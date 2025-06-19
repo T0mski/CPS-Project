@@ -1,14 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Unity.Mathematics;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.UI;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
-using static UnityEngine.RuleTile.TilingRuleOutput;
+
 
 public class PoleScript : MonoBehaviour
 {
@@ -22,10 +13,8 @@ public class PoleScript : MonoBehaviour
     // declares all the variables for the extention of the pole.
     private Vector3 NextLength;
     private Vector3 NewLength;
-    private Vector3 origionalSize;
     private Vector3 NextVert;
     private Vector3 NewVert;
-    private Vector3 CurenrtPos;
     private Vector3 NewColliderVert;
     private Vector3 NextColliderVert;
     public UnityEngine.Transform CustomPivot { get; set; }
@@ -35,13 +24,6 @@ public class PoleScript : MonoBehaviour
     public PoleCollisionScript poleCollisionScript;
     public GameObject PlayerCharacter;
 
-
-    private Vector3 Scale;
-    private Quaternion Rotation;
-    private Vector3 Position;
-
-    private Quaternion ColliderRot;
-    private Vector3 ColliderPos;
 
     private bool HasReset;
 
@@ -63,14 +45,6 @@ public class PoleScript : MonoBehaviour
     }
     private void Start()
     {
-        //Get the starting atrebutes for all of the areas of the pole.
-        Scale = transform.localScale;
-        Rotation = transform.rotation;
-        Position = transform.position;
-
-        ColliderPos = PipeCollider.transform.position;
-        ColliderRot = PipeCollider.transform.rotation;
-
         CustomPivot = GameObject.Find("Pivot").transform;
     }
     private void Polefalling()
