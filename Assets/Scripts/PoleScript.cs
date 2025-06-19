@@ -119,7 +119,7 @@ public class PoleScript : MonoBehaviour
     //Checks collisions.
     void CollisionChecker()
     {
-        if (PipeCollider.GetComponent<PoleCollisionScript>().CollisionCheck == true)
+        if (poleCollisionScript.CollisionCheck == true)
         {
             isRotating = false;
             // checks if the pole has landed on the next building correctly.
